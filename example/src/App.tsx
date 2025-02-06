@@ -1,23 +1,22 @@
 import { MultiStep, Step } from 'react-native-multistep';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <MultiStep>
-        <Step>
-          <Text>Step 1: Personal Information</Text>
-          {/* You can add form fields here */}
+      <MultiStep tintColor="#3DC2EC">
+        <Step title="Personal Details">
+          <TextInput placeholder="First name" style={styles.input} />
+          <TextInput placeholder="Last name" style={styles.input} />
         </Step>
 
-        <Step>
-          <Text>Step 2: Address</Text>
-          {/* Address form fields */}
+        <Step title="Product Details">
+          <TextInput placeholder="Price" style={styles.input} />
+          <TextInput placeholder="Remarks" style={styles.input} />
         </Step>
 
-        <Step>
-          <Text>Step 3: Review</Text>
-          {/* Review the information */}
+        <Step title="Order Details">
+          <TextInput placeholder="Order" style={styles.input} />
         </Step>
       </MultiStep>
     </SafeAreaView>
@@ -27,6 +26,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    paddingTop: 20,
+  },
+  input: {
+    height: 40,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    borderColor: 'gray',
   },
 });

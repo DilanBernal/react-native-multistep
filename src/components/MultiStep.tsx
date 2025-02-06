@@ -5,17 +5,23 @@ import {
   TouchableOpacity,
   Text,
   type ViewProps,
+  Dimensions,
 } from 'react-native';
 import React, { useState, useRef } from 'react';
+import Button from './Button';
 
 interface IMultiStep extends ViewProps {
   children: React.ReactNode;
   prevButtonText?: string;
   nextButtonText?: string;
+  tintColor?: string;
 }
 
 const MultiStep = (props: IMultiStep) => {
-  const { children, prevButtonText, nextButtonText, style, ...rest } = props;
+  const { children, prevButtonText, nextButtonText, tintColor, ...rest } =
+    props;
+
+  const COLOR = tintColor || '#DE3163';
 
   const stepCount = React.Children.count(children);
   const [currentStep, setCurrentStep] = useState(0);
@@ -41,8 +47,37 @@ const MultiStep = (props: IMultiStep) => {
     }
   };
 
+  const titles = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return child.props.title || '';
+    }
+    return '';
+  });
+
   return (
-    <View style={[styles.container, style]} {...rest}>
+    <View style={styles.container} {...rest}>
+      <View style={styles.navigationContainer}>
+        {titles?.map((title, index) => (
+          <View key={index} style={styles.navigationItem}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: currentStep >= index ? COLOR : '#758694',
+                fontWeight: currentStep >= index ? '500' : 'normal',
+              }}
+            >
+              {title}
+            </Text>
+            <View
+              style={{
+                height: 5,
+                borderRadius: 5,
+                backgroundColor: currentStep >= index ? COLOR : '#758694',
+              }}
+            ></View>
+          </View>
+        ))}
+      </View>
       <FlatList
         ref={flatListRef}
         data={React.Children.toArray(children)}
@@ -58,19 +93,22 @@ const MultiStep = (props: IMultiStep) => {
       />
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={prevStep}
-          disabled={currentStep === 0}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>{prevButtonText || 'Prev'}</Text>
+        <TouchableOpacity onPress={prevStep} disabled={currentStep === 0}>
+          <Button
+            title={prevButtonText || 'Back'}
+            varient="secondary"
+            tintColor={COLOR}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={nextStep}
           disabled={currentStep === stepCount - 1}
-          style={styles.button}
         >
-          <Text style={styles.buttonText}>{nextButtonText || 'Next'}</Text>
+          <Button
+            title={nextButtonText || 'Next'}
+            varient="primary"
+            tintColor={COLOR}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -82,24 +120,30 @@ export default MultiStep;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    paddingTop: 20,
+    gap: 10,
+  },
+  navigationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 15,
+    width: '100%',
+    padding: 10,
+  },
+  navigationItem: {
+    flexGrow: 1,
+    gap: 10,
   },
   stepContainer: {
-    width: 300,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: Dimensions.get('window').width,
+    flex: 1,
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 15,
     marginTop: 20,
-  },
-  button: {
-    padding: 10,
-    backgroundColor: '#007BFF',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
   },
 });
