@@ -1,13 +1,20 @@
-import { View, Text, StyleSheet, type ViewProps } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  type ViewProps,
+  type TextStyle,
+} from 'react-native';
 
 interface IButton extends ViewProps {
   title: string;
   varient: 'primary' | 'secondary';
   tintColor: string;
+  textStyle?: TextStyle;
 }
 
 const Button = (props: IButton) => {
-  const { title, varient, tintColor, style } = props;
+  const { title, varient, tintColor, style, textStyle } = props;
 
   return (
     <View
@@ -27,6 +34,7 @@ const Button = (props: IButton) => {
           {
             color: varient === 'primary' ? 'white' : tintColor,
           },
+          textStyle,
         ]}
       >
         {title}

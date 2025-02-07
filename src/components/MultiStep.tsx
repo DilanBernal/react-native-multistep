@@ -18,6 +18,8 @@ interface IMultiStep extends ViewProps {
   nextButtonText?: string;
   prevButtonStyle?: ViewStyle;
   nextButtonStyle?: ViewStyle;
+  prevButtonTextStyle?: TextStyle;
+  nextButtonTextStyle?: TextStyle;
   tintColor?: string;
   indicatorTitleStyle?: TextStyle;
 }
@@ -29,6 +31,8 @@ const MultiStep = (props: IMultiStep) => {
     nextButtonText,
     prevButtonStyle,
     nextButtonStyle,
+    prevButtonTextStyle,
+    nextButtonTextStyle,
     tintColor,
     indicatorTitleStyle,
     ...rest
@@ -126,6 +130,7 @@ const MultiStep = (props: IMultiStep) => {
             varient="secondary"
             tintColor={COLOR}
             style={prevButtonStyle}
+            textStyle={prevButtonTextStyle}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -137,6 +142,7 @@ const MultiStep = (props: IMultiStep) => {
             varient="primary"
             tintColor={COLOR}
             style={nextButtonStyle}
+            textStyle={nextButtonTextStyle}
           />
         </TouchableOpacity>
       </View>
