@@ -24,7 +24,7 @@ interface IMultiStep extends ViewProps {
   nextButtonComponent?: JSX.Element;
   tintColor?: string;
   indicatorTitleStyle?: TextStyle;
-  indicatorHeight?: number;
+  indicatorTitleStyle;
 }
 
 const MultiStep = (props: IMultiStep) => {
@@ -40,7 +40,6 @@ const MultiStep = (props: IMultiStep) => {
     nextButtonComponent,
     tintColor,
     indicatorTitleStyle,
-    indicatorHeight,
     ...rest
   } = props;
 
@@ -70,6 +69,14 @@ const MultiStep = (props: IMultiStep) => {
     }
   };
 
+  const handleNavigationItemPress = (index: number) => {
+    setCurrentStep(index);
+    flatListRef.current?.scrollToIndex({
+      index,
+      animated: true,
+    });
+  };
+
   const titles = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       return {
@@ -85,7 +92,11 @@ const MultiStep = (props: IMultiStep) => {
     <View style={styles.container} {...rest}>
       <View style={styles.navigationContainer}>
         {titles?.map(({ title, titleStyle, titleComponent }, index) => (
-          <View key={index} style={styles.navigationItem}>
+          <TouchableOpacity
+            key={index}
+            style={styles.navigationItem}
+            onPress={() => handleNavigationItemPress(index)}
+          >
             {titleComponent ? (
               titleComponent
             ) : (
@@ -106,12 +117,12 @@ const MultiStep = (props: IMultiStep) => {
 
             <View
               style={{
-                height: indicatorHeight ?? 5,
+                height: 5,
                 borderRadius: 5,
                 backgroundColor: currentStep >= index ? COLOR : '#758694',
               }}
             ></View>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
 
