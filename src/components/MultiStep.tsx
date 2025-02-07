@@ -60,29 +60,35 @@ const MultiStep = (props: IMultiStep) => {
       return {
         title: child.props.title || '',
         titleStyle: child.props.titleStyle || {},
+        titleComponent: child.props.titleComponent,
       };
     }
-    return { title: '', titleStyle: {} };
+    return { title: '', titleStyle: {}, titleComponent: null };
   });
 
   return (
     <View style={styles.container} {...rest}>
       <View style={styles.navigationContainer}>
-        {titles?.map(({ title, titleStyle }, index) => (
+        {titles?.map(({ title, titleStyle, titleComponent }, index) => (
           <View key={index} style={styles.navigationItem}>
-            <Text
-              style={[
-                indicatorTitleStyle,
-                {
-                  textAlign: 'center',
-                  color: currentStep >= index ? COLOR : '#758694',
-                  fontWeight: currentStep >= index ? '500' : 'normal',
-                },
-                titleStyle,
-              ]}
-            >
-              {title}
-            </Text>
+            {titleComponent ? (
+              titleComponent
+            ) : (
+              <Text
+                style={[
+                  indicatorTitleStyle,
+                  {
+                    textAlign: 'center',
+                    color: currentStep >= index ? COLOR : '#758694',
+                    fontWeight: currentStep >= index ? '500' : 'normal',
+                  },
+                  titleStyle,
+                ]}
+              >
+                {title}
+              </Text>
+            )}
+
             <View
               style={{
                 height: 5,
@@ -93,6 +99,7 @@ const MultiStep = (props: IMultiStep) => {
           </View>
         ))}
       </View>
+
       <FlatList
         ref={flatListRef}
         data={React.Children.toArray(children)}

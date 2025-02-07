@@ -5,7 +5,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <MultiStep tintColor="#16C47F">
-        <Step title="Personal Details">
+        <Step title="User Details">
           <TextInput placeholder="First name" style={styles.input} />
           <TextInput placeholder="Last name" style={styles.input} />
         </Step>
