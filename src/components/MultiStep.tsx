@@ -24,7 +24,7 @@ interface IMultiStep extends ViewProps {
   nextButtonComponent?: JSX.Element;
   tintColor?: string;
   indicatorTitleStyle?: TextStyle;
-  indicatorTitleStyle;
+  indicatorHeight?: number;
 }
 
 const MultiStep = (props: IMultiStep) => {
@@ -40,6 +40,7 @@ const MultiStep = (props: IMultiStep) => {
     nextButtonComponent,
     tintColor,
     indicatorTitleStyle,
+    indicatorHeight,
     ...rest
   } = props;
 
@@ -117,7 +118,7 @@ const MultiStep = (props: IMultiStep) => {
 
             <View
               style={{
-                height: 5,
+                height: indicatorHeight ?? 5,
                 borderRadius: 5,
                 backgroundColor: currentStep >= index ? COLOR : '#758694',
               }}
