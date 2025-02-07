@@ -20,6 +20,8 @@ interface IMultiStep extends ViewProps {
   nextButtonStyle?: ViewStyle;
   prevButtonTextStyle?: TextStyle;
   nextButtonTextStyle?: TextStyle;
+  prevButtonComponent?: JSX.Element;
+  nextButtonComponent?: JSX.Element;
   tintColor?: string;
   indicatorTitleStyle?: TextStyle;
 }
@@ -33,6 +35,8 @@ const MultiStep = (props: IMultiStep) => {
     nextButtonStyle,
     prevButtonTextStyle,
     nextButtonTextStyle,
+    prevButtonComponent,
+    nextButtonComponent,
     tintColor,
     indicatorTitleStyle,
     ...rest
@@ -125,25 +129,33 @@ const MultiStep = (props: IMultiStep) => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={prevStep} disabled={currentStep === 0}>
-          <Button
-            title={prevButtonText || 'Back'}
-            varient="secondary"
-            tintColor={COLOR}
-            style={prevButtonStyle}
-            textStyle={prevButtonTextStyle}
-          />
+          {prevButtonComponent ? (
+            prevButtonComponent
+          ) : (
+            <Button
+              title={prevButtonText || 'Back'}
+              varient="secondary"
+              tintColor={COLOR}
+              style={prevButtonStyle}
+              textStyle={prevButtonTextStyle}
+            />
+          )}
         </TouchableOpacity>
         <TouchableOpacity
           onPress={nextStep}
           disabled={currentStep === stepCount - 1}
         >
-          <Button
-            title={nextButtonText || 'Next'}
-            varient="primary"
-            tintColor={COLOR}
-            style={nextButtonStyle}
-            textStyle={nextButtonTextStyle}
-          />
+          {nextButtonComponent ? (
+            nextButtonComponent
+          ) : (
+            <Button
+              title={nextButtonText || 'Next'}
+              varient="primary"
+              tintColor={COLOR}
+              style={nextButtonStyle}
+              textStyle={nextButtonTextStyle}
+            />
+          )}
         </TouchableOpacity>
       </View>
     </View>
