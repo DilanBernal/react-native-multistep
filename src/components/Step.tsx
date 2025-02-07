@@ -1,7 +1,8 @@
-import { StyleSheet, View, type ViewProps } from 'react-native';
+import { StyleSheet, View, type TextStyle, type ViewProps } from 'react-native';
 
 interface IStep extends ViewProps {
   title?: string;
+  titleStyle?: TextStyle;
   children: React.ReactNode;
 }
 

@@ -6,6 +6,7 @@ import {
   Text,
   type ViewProps,
   Dimensions,
+  type TextStyle,
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import Button from './Button';
@@ -15,11 +16,18 @@ interface IMultiStep extends ViewProps {
   prevButtonText?: string;
   nextButtonText?: string;
   tintColor?: string;
+  indicatorTitleStyle?: TextStyle;
 }
 
 const MultiStep = (props: IMultiStep) => {
-  const { children, prevButtonText, nextButtonText, tintColor, ...rest } =
-    props;
+  const {
+    children,
+    prevButtonText,
+    nextButtonText,
+    tintColor,
+    indicatorTitleStyle,
+    ...rest
+  } = props;
 
   const COLOR = tintColor || '#DE3163';
 
@@ -49,22 +57,29 @@ const MultiStep = (props: IMultiStep) => {
 
   const titles = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      return child.props.title || '';
+      return {
+        title: child.props.title || '',
+        titleStyle: child.props.titleStyle || {},
+      };
     }
-    return '';
+    return { title: '', titleStyle: {} };
   });
 
   return (
     <View style={styles.container} {...rest}>
       <View style={styles.navigationContainer}>
-        {titles?.map((title, index) => (
+        {titles?.map(({ title, titleStyle }, index) => (
           <View key={index} style={styles.navigationItem}>
             <Text
-              style={{
-                textAlign: 'center',
-                color: currentStep >= index ? COLOR : '#758694',
-                fontWeight: currentStep >= index ? '500' : 'normal',
-              }}
+              style={[
+                indicatorTitleStyle,
+                {
+                  textAlign: 'center',
+                  color: currentStep >= index ? COLOR : '#758694',
+                  fontWeight: currentStep >= index ? '500' : 'normal',
+                },
+                titleStyle,
+              ]}
             >
               {title}
             </Text>
