@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, type ViewProps } from 'react-native';
 
-interface IButton {
+interface IButton extends ViewProps {
   title: string;
   varient: 'primary' | 'secondary';
   tintColor: string;
 }
 
 const Button = (props: IButton) => {
-  const { title, varient, tintColor } = props;
+  const { title, varient, tintColor, style } = props;
 
   return (
     <View
@@ -18,6 +18,7 @@ const Button = (props: IButton) => {
           borderWidth: varient === 'secondary' ? 1 : 0,
           borderColor: tintColor,
         },
+        style,
       ]}
     >
       <Text

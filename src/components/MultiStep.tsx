@@ -7,6 +7,7 @@ import {
   type ViewProps,
   Dimensions,
   type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import Button from './Button';
@@ -15,6 +16,8 @@ interface IMultiStep extends ViewProps {
   children: React.ReactNode;
   prevButtonText?: string;
   nextButtonText?: string;
+  prevButtonStyle?: ViewStyle;
+  nextButtonStyle?: ViewStyle;
   tintColor?: string;
   indicatorTitleStyle?: TextStyle;
 }
@@ -24,6 +27,8 @@ const MultiStep = (props: IMultiStep) => {
     children,
     prevButtonText,
     nextButtonText,
+    prevButtonStyle,
+    nextButtonStyle,
     tintColor,
     indicatorTitleStyle,
     ...rest
@@ -120,6 +125,7 @@ const MultiStep = (props: IMultiStep) => {
             title={prevButtonText || 'Back'}
             varient="secondary"
             tintColor={COLOR}
+            style={prevButtonStyle}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -130,6 +136,7 @@ const MultiStep = (props: IMultiStep) => {
             title={nextButtonText || 'Next'}
             varient="primary"
             tintColor={COLOR}
+            style={nextButtonStyle}
           />
         </TouchableOpacity>
       </View>
