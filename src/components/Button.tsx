@@ -1,19 +1,22 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  type ViewProps,
-  type TextStyle,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import type { ButtonProps } from '../ types';
 
-interface IButton extends ViewProps {
-  title: string;
-  varient: 'primary' | 'secondary';
-  tintColor: string;
-  textStyle?: TextStyle;
-}
+/**
+ * @internal
+ * A reusable button component used internally within the library.
+ * Supports `primary` (solid) and `secondary` (outline) variants.
+ *
+ * - `primary`: A solid button with a background color.
+ * - `secondary`: An outline button with a border and transparent background.
+ *
+ * @example
+ * ```tsx
+ * <Button title="Next" varient="primary" tintColor="#007AFF" />
+ * <Button title="Back" varient="secondary" tintColor="#007AFF" />
+ * ```
+ */
 
-const Button = (props: IButton) => {
+const Button = (props: ButtonProps) => {
   const { title, varient, tintColor, style, textStyle } = props;
 
   return (

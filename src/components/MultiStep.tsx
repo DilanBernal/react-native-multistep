@@ -4,30 +4,30 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
-  type ViewProps,
   Dimensions,
-  type TextStyle,
-  type ViewStyle,
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import Button from './Button';
+import type { MultiStepProps } from '../ types';
 
-interface IMultiStep extends ViewProps {
-  children: React.ReactNode;
-  prevButtonText?: string;
-  nextButtonText?: string;
-  prevButtonStyle?: ViewStyle;
-  nextButtonStyle?: ViewStyle;
-  prevButtonTextStyle?: TextStyle;
-  nextButtonTextStyle?: TextStyle;
-  prevButtonComponent?: JSX.Element;
-  nextButtonComponent?: JSX.Element;
-  tintColor?: string;
-  indicatorTitleStyle?: TextStyle;
-  indicatorHeight?: number;
-}
+/**
+ * A multi-step container for managing step-based navigation.
+ * It provides built-in navigation between steps with customizable buttons.
+ *
+ * @example
+ * ```tsx
+ * <MultiStep>
+ *   <Step title="Step 1">
+ *     <Text>Content for Step 1</Text>
+ *   </Step>
+ *   <Step title="Step 2">
+ *     <Text>Content for Step 2</Text>
+ *   </Step>
+ * </MultiStep>
+ * ```
+ */
 
-const MultiStep = (props: IMultiStep) => {
+const MultiStep = (props: MultiStepProps) => {
   const {
     children,
     prevButtonText,

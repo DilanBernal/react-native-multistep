@@ -1,14 +1,19 @@
-import type React from 'react';
-import { StyleSheet, View, type TextStyle, type ViewProps } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StepProps } from '../ types';
 
-interface IStep extends ViewProps {
-  title?: string;
-  titleStyle?: TextStyle;
-  titleComponent?: ({ isCompleted }: { isCompleted?: boolean }) => JSX.Element;
-  children: React.ReactNode;
-}
+/**
+ * Represents a single step in a multi-step process.
+ * Can display a title, a custom title component, and any child content.
+ *
+ * @example
+ * ```tsx
+ * <Step title="Step 1">
+ *   <Text>Content for step 1</Text>
+ * </Step>
+ * ```
+ */
 
-const Step = (props: IStep) => {
+const Step = (props: StepProps) => {
   const { children, style, ...rest } = props;
 
   return (
