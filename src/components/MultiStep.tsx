@@ -78,53 +78,61 @@ const MultiStep = (props: IMultiStep) => {
     });
   };
 
-  const titles = React.Children.map(children, (child) => {
+  const titles = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
       return {
         title: child.props.title || '',
         titleStyle: child.props.titleStyle || {},
         titleComponent: child.props.titleComponent,
+        isCompleted: currentStep >= index,
       };
     }
-    return { title: '', titleStyle: {}, titleComponent: null };
+    return {
+      title: '',
+      titleStyle: {},
+      titleComponent: null,
+      isCompleted: false,
+    };
   });
 
   return (
     <View style={styles.container} {...rest}>
       <View style={styles.navigationContainer}>
-        {titles?.map(({ title, titleStyle, titleComponent }, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.navigationItem}
-            onPress={() => handleNavigationItemPress(index)}
-          >
-            {titleComponent ? (
-              titleComponent
-            ) : (
-              <Text
-                style={[
-                  indicatorTitleStyle,
-                  {
-                    textAlign: 'center',
-                    color: currentStep >= index ? COLOR : '#758694',
-                    fontWeight: currentStep >= index ? '500' : 'normal',
-                  },
-                  titleStyle,
-                ]}
-              >
-                {title}
-              </Text>
-            )}
+        {titles?.map(
+          ({ title, titleStyle, titleComponent, isCompleted }, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.navigationItem}
+              onPress={() => handleNavigationItemPress(index)}
+            >
+              {titleComponent ? (
+                titleComponent({ isCompleted })
+              ) : (
+                <Text
+                  style={[
+                    indicatorTitleStyle,
+                    {
+                      textAlign: 'center',
+                      color: currentStep >= index ? COLOR : '#758694',
+                      fontWeight: currentStep >= index ? '500' : 'normal',
+                    },
+                    titleStyle,
+                  ]}
+                >
+                  {title}
+                </Text>
+              )}
 
-            <View
-              style={{
-                height: indicatorHeight ?? 5,
-                borderRadius: 5,
-                backgroundColor: currentStep >= index ? COLOR : '#758694',
-              }}
-            ></View>
-          </TouchableOpacity>
-        ))}
+              <View
+                style={{
+                  height: indicatorHeight ?? 5,
+                  borderRadius: 5,
+                  backgroundColor: currentStep >= index ? COLOR : '#758694',
+                }}
+              ></View>
+            </TouchableOpacity>
+          )
+        )}
       </View>
 
       <FlatList
