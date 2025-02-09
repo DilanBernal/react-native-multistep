@@ -6,7 +6,7 @@ import {
   Text,
   useWindowDimensions,
 } from 'react-native';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Button from './Button';
 import ProgressCircle from './ProgressCircle';
 import type { MultiStepProps } from '../ types';
@@ -65,42 +65,52 @@ const MultiStep = (props: MultiStepProps) => {
 
   const { width } = useWindowDimensions();
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     if (currentStep < stepCount - 1) {
-      setCurrentStep((prev) => prev + 1);
-      flatListRef.current?.scrollToIndex({
-        index: currentStep + 1,
-        animated: true,
+      setCurrentStep((prev) => {
+        const nextIndex = prev + 1;
+        flatListRef.current?.scrollToIndex({
+          index: nextIndex,
+          animated: true,
+        });
+        return nextIndex;
       });
     }
-  };
+  }, [currentStep, stepCount]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
-      flatListRef.current?.scrollToIndex({
-        index: currentStep - 1,
-        animated: true,
+      setCurrentStep((prev) => {
+        const prevIndex = prev - 1;
+        flatListRef.current?.scrollToIndex({
+          index: prevIndex,
+          animated: true,
+        });
+        return prevIndex;
       });
     }
-  };
+  }, [currentStep]);
 
-  const titles = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      return {
-        title: child.props.title || '',
-        titleStyle: child.props.titleStyle || {},
-        subTitleStyle: child.props.subTitleStyle || {},
-        titleComponent: child.props.titleComponent,
-      };
-    }
-    return {
-      title: '',
-      titleStyle: {},
-      subTitleStyle: {},
-      titleComponent: null,
-    };
-  });
+  const titles = React.useMemo(
+    () =>
+      React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          return {
+            title: child.props.title || '',
+            titleStyle: child.props.titleStyle || {},
+            subTitleStyle: child.props.subTitleStyle || {},
+            titleComponent: child.props.titleComponent,
+          };
+        }
+        return {
+          title: '',
+          titleStyle: {},
+          subTitleStyle: {},
+          titleComponent: null,
+        };
+      }),
+    [children]
+  );
 
   if (!titles || titles.length === 0) {
     if (__DEV__)
