@@ -69,7 +69,7 @@ export interface ProgressCircleProps {
 /**
  * Props for the MultiStep component, which handles multi-step navigation.
  */
-export interface MultiStepProps extends ViewProps {
+export interface MultiStepProps {
   /**
    * The steps or content to be rendered inside the multi-step view.
    * Typically an array of `Step` components.
@@ -150,6 +150,18 @@ export interface MultiStepProps extends ViewProps {
    * Defaults to `#DE3163`.
    */
   progressCircleTintColor?: string;
+
+  /**
+   * Style for the header where the title and progress bar are shown.
+   * Accepts a React Native `ViewStyle` object.
+   */
+  headerStyle?: ViewStyle;
+
+  /**
+   * Style for the form container.
+   * Accepts a React Native `ViewStyle` object.
+   */
+  formContainerStyle?: ViewStyle;
 
   /**
    * Callback function that is called when the user presses the submit button on the last step.

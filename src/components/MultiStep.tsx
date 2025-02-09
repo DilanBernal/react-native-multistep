@@ -51,8 +51,9 @@ const MultiStep = (props: MultiStepProps) => {
     progressCircleSize,
     progressCircleStrokeWidth,
     progressCircleTintColor,
+    headerStyle,
+    formContainerStyle,
     onSubmit,
-    ...rest
   } = props;
 
   const COLOR = tintColor || '#DE3163';
@@ -109,8 +110,8 @@ const MultiStep = (props: MultiStepProps) => {
   const currentTitle = titles[currentStep];
 
   return (
-    <View style={styles.container} {...rest}>
-      <View style={styles.navigationContainer}>
+    <View style={styles.container}>
+      <View style={[styles.navigationContainer, headerStyle]}>
         <Animated.View
           style={styles.navigationItem}
           entering={FadeInLeft.duration(300).easing(Easing.inOut(Easing.quad))}
@@ -166,7 +167,9 @@ const MultiStep = (props: MultiStepProps) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={[styles.stepContainer, { width }]}>{item}</View>
+          <View style={[styles.stepContainer, { width }, formContainerStyle]}>
+            {item}
+          </View>
         )}
         extraData={currentStep}
         itemLayoutAnimation={LinearTransition}
