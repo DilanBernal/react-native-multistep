@@ -116,7 +116,7 @@ const MultiStep = (props: MultiStepProps) => {
           style={styles.navigationItem}
           entering={FadeInLeft.duration(300).easing(Easing.inOut(Easing.quad))}
           exiting={FadeOutRight.duration(300).easing(Easing.inOut(Easing.quad))}
-          key={currentTitle?.title || currentTitle?.titleComponent}
+          key={currentStep}
         >
           {currentTitle?.titleComponent ? (
             <currentTitle.titleComponent
@@ -138,17 +138,17 @@ const MultiStep = (props: MultiStepProps) => {
             </Text>
           )}
 
-          {currentStep < stepCount - 1 && (
-            <Text
-              style={[
-                styles.nextStepTitle,
-                indicatorSubtitleStyle,
-                currentTitle?.subTitleStyle,
-              ]}
-            >
-              Next: {titles[currentStep + 1]?.title}
-            </Text>
-          )}
+          <Text
+            style={[
+              styles.nextStepTitle,
+              indicatorSubtitleStyle,
+              currentTitle?.subTitleStyle,
+            ]}
+          >
+            {currentStep < stepCount - 1
+              ? `Next: ${titles[currentStep + 1]?.title}`
+              : 'Completion'}
+          </Text>
         </Animated.View>
 
         <ProgressCircle
@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
   },
   navigationContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
     gap: 15,
     width: '100%',
