@@ -4,10 +4,11 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
-  Dimensions,
+  useWindowDimensions,
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import Button from './Button';
+import ProgressCircle from './ProgressCircle';
 import type { MultiStepProps } from '../ types';
 
 /**
@@ -40,7 +41,10 @@ const MultiStep = (props: MultiStepProps) => {
     nextButtonComponent,
     tintColor,
     indicatorTitleStyle,
-    indicatorHeight,
+    indicatorSubtitleStyle,
+    progressCircleSize,
+    progressCircleStrokeWidth,
+    progressCircleTintColor,
     ...rest
   } = props;
 
@@ -49,6 +53,8 @@ const MultiStep = (props: MultiStepProps) => {
   const stepCount = React.Children.count(children);
   const [currentStep, setCurrentStep] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+
+  const { width } = useWindowDimensions();
 
   const nextStep = () => {
     if (currentStep < stepCount - 1) {
@@ -70,19 +76,12 @@ const MultiStep = (props: MultiStepProps) => {
     }
   };
 
-  const handleNavigationItemPress = (index: number) => {
-    setCurrentStep(index);
-    flatListRef.current?.scrollToIndex({
-      index,
-      animated: true,
-    });
-  };
-
   const titles = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
       return {
         title: child.props.title || '',
         titleStyle: child.props.titleStyle || {},
+        subTitleStyle: child.props.subTitleStyle || {},
         titleComponent: child.props.titleComponent,
         isCompleted: currentStep >= index,
       };
@@ -90,49 +89,64 @@ const MultiStep = (props: MultiStepProps) => {
     return {
       title: '',
       titleStyle: {},
+      subTitleStyle: {},
       titleComponent: null,
       isCompleted: false,
     };
   });
 
+  if (!titles || titles.length === 0) {
+    if (__DEV__)
+      console.error('MultiStep requires at least one Step component.');
+    return null;
+  }
+
+  const currentTitle = titles[currentStep];
+
   return (
     <View style={styles.container} {...rest}>
       <View style={styles.navigationContainer}>
-        {titles?.map(
-          ({ title, titleStyle, titleComponent, isCompleted }, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.navigationItem}
-              onPress={() => handleNavigationItemPress(index)}
+        <View style={styles.navigationItem}>
+          {currentTitle?.titleComponent ? (
+            <currentTitle.titleComponent
+              isCompleted={currentTitle.isCompleted}
+            />
+          ) : (
+            <Text
+              style={[
+                {
+                  fontSize: 18,
+                  fontWeight: '600',
+                  color: COLOR,
+                },
+                indicatorTitleStyle,
+                currentTitle?.titleStyle,
+              ]}
             >
-              {titleComponent ? (
-                titleComponent({ isCompleted })
-              ) : (
-                <Text
-                  style={[
-                    indicatorTitleStyle,
-                    {
-                      textAlign: 'center',
-                      color: currentStep >= index ? COLOR : '#758694',
-                      fontWeight: currentStep >= index ? '500' : 'normal',
-                    },
-                    titleStyle,
-                  ]}
-                >
-                  {title}
-                </Text>
-              )}
+              {currentTitle?.title}
+            </Text>
+          )}
 
-              <View
-                style={{
-                  height: indicatorHeight ?? 5,
-                  borderRadius: 5,
-                  backgroundColor: currentStep >= index ? COLOR : '#758694',
-                }}
-              ></View>
-            </TouchableOpacity>
-          )
-        )}
+          {currentStep < stepCount - 1 && (
+            <Text
+              style={[
+                styles.nextStepTitle,
+                indicatorSubtitleStyle,
+                currentTitle?.subTitleStyle,
+              ]}
+            >
+              Next: {titles[currentStep + 1]?.title}
+            </Text>
+          )}
+        </View>
+
+        <ProgressCircle
+          currentStep={currentStep + 1}
+          totalSteps={titles.length}
+          size={progressCircleSize}
+          strokeWidth={progressCircleStrokeWidth}
+          tintColor={progressCircleTintColor || COLOR}
+        />
       </View>
 
       <FlatList
@@ -144,7 +158,7 @@ const MultiStep = (props: MultiStepProps) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={styles.stepContainer}>{item}</View>
+          <View style={[styles.stepContainer, { width }]}>{item}</View>
         )}
         extraData={currentStep}
       />
@@ -195,17 +209,19 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     gap: 15,
     width: '100%',
-    padding: 10,
+    paddingHorizontal: 15,
   },
   navigationItem: {
-    flexGrow: 1,
+    flex: 1,
     gap: 10,
   },
+  nextStepTitle: {
+    color: '#45474B',
+  },
   stepContainer: {
-    width: Dimensions.get('window').width,
     flex: 1,
   },
   buttonContainer: {

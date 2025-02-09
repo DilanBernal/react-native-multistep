@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <MultiStep tintColor="#16C47F">
+      <MultiStep tintColor="#86A788">
         <Step title="User Details">
           <TextInput placeholder="First name" style={styles.input} />
           <TextInput placeholder="Last name" style={styles.input} />
@@ -17,6 +17,21 @@ export default function App() {
 
         <Step title="Order Details">
           <TextInput placeholder="Order" style={styles.input} />
+        </Step>
+
+        <Step title="Product Details">
+          <TextInput placeholder="Price" style={styles.input} />
+          <TextInput placeholder="Remarks" style={styles.input} />
+        </Step>
+
+        <Step title="Product Details">
+          <TextInput placeholder="Price" style={styles.input} />
+          <TextInput placeholder="Remarks" style={styles.input} />
+        </Step>
+
+        <Step title="Product Details">
+          <TextInput placeholder="Price" style={styles.input} />
+          <TextInput placeholder="Remarks" style={styles.input} />
         </Step>
       </MultiStep>
     </SafeAreaView>

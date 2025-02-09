@@ -5,13 +5,19 @@ export interface StepProps extends ViewProps {
    * The title of the step.
    * This is displayed as the step's label.
    */
-  title?: string;
+  title: string;
 
   /**
    * Style for the title text.
    * Accepts a React Native `TextStyle` object.
    */
   titleStyle?: TextStyle;
+
+  /**
+   * Style for the subtitle text.
+   * Accepts a React Native `TextStyle` object.
+   */
+  subTitleStyle?: TextStyle;
 
   /**
    * Custom component for the title.
@@ -27,6 +33,41 @@ export interface StepProps extends ViewProps {
 }
 
 /**
+ * @internal
+ * Props for the internal ProgressCircle component, which visually represents step progress.
+ * This component is not exposed to end users.
+ */
+export interface ProgressCircleProps {
+  /**
+   * The current step number, starting from 1.
+   */
+  currentStep: number;
+
+  /**
+   * The total number of steps in the process.
+   */
+  totalSteps: number;
+
+  /**
+   * The size (diameter) of the circular progress indicator in pixels.
+   * Defaults to `65`.
+   */
+  size?: number;
+
+  /**
+   * The thickness of the progress ring.
+   * Defaults to `5`.
+   */
+  strokeWidth?: number;
+
+  /**
+   * The color of the progress ring.
+   * Defaults to `#DE3163.
+   */
+  tintColor?: string;
+}
+
+/**
  * Props for the MultiStep component, which handles multi-step navigation.
  */
 export interface MultiStepProps extends ViewProps {
@@ -37,7 +78,7 @@ export interface MultiStepProps extends ViewProps {
   children: React.ReactNode;
 
   /**
-   * Text for the "Previous" button. Defaults to "Previous" if not provided.
+   * Text for the "Previous" button. Defaults to "Back" if not provided.
    */
   prevButtonText?: string;
 
@@ -89,9 +130,27 @@ export interface MultiStepProps extends ViewProps {
   indicatorTitleStyle?: TextStyle;
 
   /**
-   * Height of the step indicator.
+   * Style for the step indicator subtitles.
    */
-  indicatorHeight?: number;
+  indicatorSubtitleStyle?: TextStyle;
+
+  /**
+   * The size (diameter) of the circular progress indicator in pixels.
+   * Defaults to `65`.
+   */
+  progressCircleSize?: number;
+
+  /**
+   * The thickness of the progress ring.
+   * Defaults to `5`.
+   */
+  progressCircleStrokeWidth?: number;
+
+  /**
+   * The color of the progress ring.
+   * Defaults to `#DE3163`.
+   */
+  progressCircleTintColor?: string;
 }
 
 /**
