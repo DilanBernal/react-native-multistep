@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
   },
   navigationContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     gap: 15,
     width: '100%',
