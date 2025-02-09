@@ -182,7 +182,7 @@ const MultiStep = (props: MultiStepProps) => {
             {item}
           </View>
         )}
-        extraData={currentStep}
+        extraData={{ currentStep, stepCount }}
         itemLayoutAnimation={LinearTransition}
       />
 
