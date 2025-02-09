@@ -83,14 +83,13 @@ const MultiStep = (props: MultiStepProps) => {
     }
   };
 
-  const titles = React.Children.map(children, (child, index) => {
+  const titles = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       return {
         title: child.props.title || '',
         titleStyle: child.props.titleStyle || {},
         subTitleStyle: child.props.subTitleStyle || {},
         titleComponent: child.props.titleComponent,
-        isCompleted: currentStep >= index,
       };
     }
     return {
@@ -98,7 +97,6 @@ const MultiStep = (props: MultiStepProps) => {
       titleStyle: {},
       subTitleStyle: {},
       titleComponent: null,
-      isCompleted: false,
     };
   });
 
@@ -120,9 +118,7 @@ const MultiStep = (props: MultiStepProps) => {
           key={currentStep}
         >
           {currentTitle?.titleComponent ? (
-            <currentTitle.titleComponent
-              isCompleted={currentTitle.isCompleted}
-            />
+            <currentTitle.titleComponent />
           ) : (
             <Text
               style={[

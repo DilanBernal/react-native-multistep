@@ -21,9 +21,8 @@ export interface StepProps extends ViewProps {
 
   /**
    * Custom component for the title.
-   * Receives an `isCompleted` prop to indicate if the step is completed.
    */
-  titleComponent?: ({ isCompleted }: { isCompleted?: boolean }) => JSX.Element;
+  titleComponent?: () => JSX.Element;
 
   /**
    * The content of the step.
