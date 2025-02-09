@@ -53,6 +53,7 @@ const MultiStep = (props: MultiStepProps) => {
     progressCircleTintColor,
     headerStyle,
     formContainerStyle,
+    buttonContainerStyle,
     onSubmit,
   } = props;
 
@@ -175,7 +176,7 @@ const MultiStep = (props: MultiStepProps) => {
         itemLayoutAnimation={LinearTransition}
       />
 
-      <View style={styles.buttonContainer}>
+      <View style={[styles.buttonContainer, buttonContainerStyle]}>
         <TouchableOpacity onPress={prevStep} disabled={currentStep === 0}>
           {prevButtonComponent ? (
             prevButtonComponent
@@ -244,6 +245,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 15,
-    marginTop: 20,
   },
 });

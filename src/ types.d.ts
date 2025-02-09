@@ -164,6 +164,12 @@ export interface MultiStepProps {
   formContainerStyle?: ViewStyle;
 
   /**
+   * Style for the button container.
+   * Accepts a React Native `ViewStyle` object.
+   */
+  buttonContainerStyle?: ViewStyle;
+
+  /**
    * Callback function that is called when the user presses the submit button on the last step.
    */
   onSubmit: () => void;
