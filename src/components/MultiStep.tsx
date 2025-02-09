@@ -10,6 +10,12 @@ import React, { useState, useRef } from 'react';
 import Button from './Button';
 import ProgressCircle from './ProgressCircle';
 import type { MultiStepProps } from '../ types';
+import Animated, {
+  FadeInLeft,
+  Easing,
+  FadeOutRight,
+  LinearTransition,
+} from 'react-native-reanimated';
 
 /**
  * A multi-step container for managing step-based navigation.
@@ -106,7 +112,12 @@ const MultiStep = (props: MultiStepProps) => {
   return (
     <View style={styles.container} {...rest}>
       <View style={styles.navigationContainer}>
-        <View style={styles.navigationItem}>
+        <Animated.View
+          style={styles.navigationItem}
+          entering={FadeInLeft.duration(300).easing(Easing.inOut(Easing.quad))}
+          exiting={FadeOutRight.duration(300).easing(Easing.inOut(Easing.quad))}
+          key={currentTitle?.title || currentTitle?.titleComponent}
+        >
           {currentTitle?.titleComponent ? (
             <currentTitle.titleComponent
               isCompleted={currentTitle.isCompleted}
@@ -138,7 +149,7 @@ const MultiStep = (props: MultiStepProps) => {
               Next: {titles[currentStep + 1]?.title}
             </Text>
           )}
-        </View>
+        </Animated.View>
 
         <ProgressCircle
           currentStep={currentStep + 1}
@@ -149,7 +160,7 @@ const MultiStep = (props: MultiStepProps) => {
         />
       </View>
 
-      <FlatList
+      <Animated.FlatList
         ref={flatListRef}
         data={React.Children.toArray(children)}
         horizontal
@@ -161,6 +172,7 @@ const MultiStep = (props: MultiStepProps) => {
           <View style={[styles.stepContainer, { width }]}>{item}</View>
         )}
         extraData={currentStep}
+        itemLayoutAnimation={LinearTransition}
       />
 
       <View style={styles.buttonContainer}>

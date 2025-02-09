@@ -19,17 +19,17 @@ export default function App() {
           <TextInput placeholder="Order" style={styles.input} />
         </Step>
 
-        <Step title="Product Details">
+        <Step title="Product Details 2">
           <TextInput placeholder="Price" style={styles.input} />
           <TextInput placeholder="Remarks" style={styles.input} />
         </Step>
 
-        <Step title="Product Details">
+        <Step title="Product Details 3">
           <TextInput placeholder="Price" style={styles.input} />
           <TextInput placeholder="Remarks" style={styles.input} />
         </Step>
 
-        <Step title="Product Details">
+        <Step title="Product Details 4">
           <TextInput placeholder="Price" style={styles.input} />
           <TextInput placeholder="Remarks" style={styles.input} />
         </Step>
