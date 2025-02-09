@@ -151,6 +151,11 @@ export interface MultiStepProps extends ViewProps {
    * Defaults to `#DE3163`.
    */
   progressCircleTintColor?: string;
+
+  /**
+   * Callback function that is called when the user presses the submit button on the last step.
+   */
+  onSubmit: () => void;
 }
 
 /**

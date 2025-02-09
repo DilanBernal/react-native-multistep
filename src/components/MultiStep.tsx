@@ -51,6 +51,7 @@ const MultiStep = (props: MultiStepProps) => {
     progressCircleSize,
     progressCircleStrokeWidth,
     progressCircleTintColor,
+    onSubmit,
     ...rest
   } = props;
 
@@ -190,14 +191,17 @@ const MultiStep = (props: MultiStepProps) => {
           )}
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={nextStep}
-          disabled={currentStep === stepCount - 1}
+          onPress={currentStep === stepCount - 1 ? onSubmit : nextStep}
         >
           {nextButtonComponent ? (
             nextButtonComponent
           ) : (
             <Button
-              title={nextButtonText || 'Next'}
+              title={
+                currentStep === stepCount - 1
+                  ? 'Submit'
+                  : nextButtonText || 'Next'
+              }
               varient="primary"
               tintColor={COLOR}
               style={nextButtonStyle}
