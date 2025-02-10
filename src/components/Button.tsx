@@ -21,6 +21,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <View
+      testID="button-container"
       style={[
         styles.container,
         {
