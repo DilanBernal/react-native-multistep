@@ -6,7 +6,7 @@ import {
   Text,
   useWindowDimensions,
 } from 'react-native';
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import ProgressCircle from './ProgressCircle';
 import type { MultiStepProps } from '../ types';
@@ -16,6 +16,7 @@ import Animated, {
   FadeOutRight,
   LinearTransition,
 } from 'react-native-reanimated';
+import Step from './Step';
 
 /**
  * A multi-step container for managing step-based navigation.
@@ -60,13 +61,31 @@ const MultiStep = (props: MultiStepProps) => {
 
   const COLOR = tintColor || '#DE3163';
 
-  const stepCount = React.Children.count(children);
+  const stepCountRef = useRef(React.Children.count(children));
+
+  useEffect(() => {
+    stepCountRef.current = React.Children.count(children);
+  }, [children]);
+
+  useEffect(() => {
+    if (__DEV__) {
+      React.Children.forEach(children, (child) => {
+        if (!React.isValidElement(child) || child.type !== Step) {
+          console.error(
+            'MultiStep only accepts `Step` components as direct children.'
+          );
+        }
+      });
+    }
+  }, [children]);
+
+  const stepCount = stepCountRef.current;
   const [currentStep, setCurrentStep] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
   const { width } = useWindowDimensions();
 
-  const nextStep = useCallback(() => {
+  const nextStep = () => {
     if (currentStep < stepCount - 1) {
       setCurrentStep((prev) => {
         const nextIndex = prev + 1;
@@ -77,9 +96,9 @@ const MultiStep = (props: MultiStepProps) => {
         return nextIndex;
       });
     }
-  }, [currentStep, stepCount]);
+  };
 
-  const prevStep = useCallback(() => {
+  const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => {
         const prevIndex = prev - 1;
@@ -90,30 +109,38 @@ const MultiStep = (props: MultiStepProps) => {
         return prevIndex;
       });
     }
-  }, [currentStep]);
+  };
 
-  const titles = React.useMemo(
-    () =>
+  const { isValid, titles } = React.useMemo(() => {
+    let allValid = true;
+
+    const extractedTitles =
       React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return {
-            title: child.props.title || '',
-            titleStyle: child.props.titleStyle || {},
-            subTitleStyle: child.props.subTitleStyle || {},
-            titleComponent: child.props.titleComponent,
-          };
+        if (!React.isValidElement(child) || child.type !== Step) {
+          allValid = false;
+          return null;
         }
-        return {
-          title: '',
-          titleStyle: {},
-          subTitleStyle: {},
-          titleComponent: null,
-        };
-      }),
-    [children]
-  );
 
-  if (!titles || titles.length === 0) {
+        return {
+          title: child.props.title || '',
+          titleStyle: child.props.titleStyle || {},
+          subTitleStyle: child.props.subTitleStyle || {},
+          titleComponent: child.props.titleComponent,
+        };
+      })?.filter(Boolean) || [];
+
+    return { isValid: allValid, titles: extractedTitles };
+  }, [children]);
+
+  if (!isValid) {
+    if (__DEV__)
+      console.error(
+        'MultiStep only accepts `Step` components as direct children.'
+      );
+    return null;
+  }
+
+  if (titles.length === 0) {
     if (__DEV__)
       console.error('MultiStep requires at least one Step component.');
     return null;
