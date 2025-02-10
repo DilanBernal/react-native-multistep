@@ -17,6 +17,7 @@ const ProgressCircle = (props: ProgressCircleProps) => {
     size = 65,
     strokeWidth = 5,
     tintColor = '#DE3163',
+    textStyle,
   } = props;
 
   const radius = (size - strokeWidth) / 2;
@@ -59,7 +60,12 @@ const ProgressCircle = (props: ProgressCircleProps) => {
         />
       </Svg>
 
-      <Text style={{ position: 'absolute', fontSize: 14, fontWeight: '600' }}>
+      <Text
+        style={[
+          { position: 'absolute', fontSize: 14, fontWeight: '600' },
+          textStyle,
+        ]}
+      >
         {currentStep} of {totalSteps}
       </Text>
     </View>

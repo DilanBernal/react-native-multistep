@@ -64,6 +64,12 @@ export interface ProgressCircleProps {
    * Defaults to `#DE3163.
    */
   tintColor?: string;
+
+  /**
+   * Style for the text inside the progress circle.
+   * Accepts a React Native `TextStyle` object.
+   */
+  textStyle?: TextStyle;
 }
 
 /**
@@ -150,6 +156,12 @@ export interface MultiStepProps {
    * Defaults to `#DE3163`.
    */
   progressCircleTintColor?: string;
+
+  /**
+   * Style for the text inside the progress circle.
+   * Accepts a React Native `TextStyle` object.
+   */
+  progressCircleTextStyle?: TextStyle;
 
   /**
    * Style for the header where the title and progress bar are shown.
