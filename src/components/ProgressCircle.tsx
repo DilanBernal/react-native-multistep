@@ -6,7 +6,7 @@ import Animated, {
   useAnimatedProps,
   withTiming,
 } from 'react-native-reanimated';
-import type { ProgressCircleProps } from '../ types';
+import type { ProgressCircleProps } from '../types';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 

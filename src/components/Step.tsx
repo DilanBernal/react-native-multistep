@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import type { StepProps } from '../ types';
+import type { StepProps } from '../types';
 
 /**
  * Represents a single step in a multi-step process.

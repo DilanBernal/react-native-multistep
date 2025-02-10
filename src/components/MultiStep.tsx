@@ -9,7 +9,6 @@ import {
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import ProgressCircle from './ProgressCircle';
-import type { MultiStepProps } from '../ types';
 import Animated, {
   FadeInLeft,
   Easing,
@@ -17,6 +16,7 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 import Step from './Step';
+import type { MultiStepProps } from '../types';
 
 /**
  * A multi-step container for managing step-based navigation.
