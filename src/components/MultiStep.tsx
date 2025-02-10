@@ -67,18 +67,6 @@ const MultiStep = (props: MultiStepProps) => {
     stepCountRef.current = React.Children.count(children);
   }, [children]);
 
-  useEffect(() => {
-    if (__DEV__) {
-      React.Children.forEach(children, (child) => {
-        if (!React.isValidElement(child) || child.type !== Step) {
-          console.error(
-            'MultiStep only accepts `Step` components as direct children.'
-          );
-        }
-      });
-    }
-  }, [children]);
-
   const stepCount = stepCountRef.current;
   const [currentStep, setCurrentStep] = useState(0);
   const flatListRef = useRef<FlatList>(null);
