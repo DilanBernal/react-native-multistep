@@ -51,6 +51,7 @@ const MultiStep = (props: MultiStepProps) => {
     progressCircleSize,
     progressCircleStrokeWidth,
     progressCircleTintColor,
+    progressCircleTextStyle,
     headerStyle,
     formContainerStyle,
     buttonContainerStyle,
@@ -166,6 +167,7 @@ const MultiStep = (props: MultiStepProps) => {
           size={progressCircleSize}
           strokeWidth={progressCircleStrokeWidth}
           tintColor={progressCircleTintColor || COLOR}
+          textStyle={progressCircleTextStyle}
         />
       </View>
 
