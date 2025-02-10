@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import type { ButtonProps } from '../ types';
+import type { ButtonProps } from '../types';
 
 /**
  * @internal
