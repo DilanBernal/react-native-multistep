@@ -149,10 +149,10 @@ const MultiStep = (props: MultiStepProps) => {
   const currentTitle = titles[currentStep];
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.navigationContainer, headerStyle]}>
+    <View style={styles.multiStepContainer}>
+      <View style={[styles.navigationHeader, headerStyle]}>
         <Animated.View
-          style={styles.navigationItem}
+          style={styles.navigationItemWrapper}
           entering={FadeInLeft.duration(300).easing(Easing.inOut(Easing.quad))}
           exiting={FadeOutRight.duration(300).easing(Easing.inOut(Easing.quad))}
           key={currentStep}
@@ -177,7 +177,7 @@ const MultiStep = (props: MultiStepProps) => {
 
           <Text
             style={[
-              styles.nextStepTitle,
+              styles.nextStepText,
               indicatorSubtitleStyle,
               currentTitle?.subTitleStyle,
             ]}
@@ -207,7 +207,9 @@ const MultiStep = (props: MultiStepProps) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={[styles.stepContainer, { width }, formContainerStyle]}>
+          <View
+            style={[styles.stepContentContainer, { width }, formContainerStyle]}
+          >
             {item}
           </View>
         )}
@@ -215,7 +217,7 @@ const MultiStep = (props: MultiStepProps) => {
         itemLayoutAnimation={LinearTransition}
       />
 
-      <View style={[styles.buttonContainer, buttonContainerStyle]}>
+      <View style={[styles.buttonGroup, buttonContainerStyle]}>
         <TouchableOpacity onPress={prevStep} disabled={currentStep === 0}>
           {prevButtonComponent ? (
             prevButtonComponent
@@ -256,12 +258,12 @@ const MultiStep = (props: MultiStepProps) => {
 export default MultiStep;
 
 const styles = StyleSheet.create({
-  container: {
+  multiStepContainer: {
     flex: 1,
     paddingTop: 20,
     gap: 10,
   },
-  navigationContainer: {
+  navigationHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -269,17 +271,17 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 15,
   },
-  navigationItem: {
+  navigationItemWrapper: {
     flex: 1,
     gap: 10,
   },
-  nextStepTitle: {
+  nextStepText: {
     color: '#45474B',
   },
-  stepContainer: {
+  stepContentContainer: {
     flex: 1,
   },
-  buttonContainer: {
+  buttonGroup: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

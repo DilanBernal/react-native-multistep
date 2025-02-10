@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, {
   useSharedValue,
@@ -36,7 +36,7 @@ const ProgressCircle = (props: ProgressCircleProps) => {
   }));
 
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Svg width={size} height={size}>
         <Circle
           cx={size / 2}
@@ -60,12 +60,7 @@ const ProgressCircle = (props: ProgressCircleProps) => {
         />
       </Svg>
 
-      <Text
-        style={[
-          { position: 'absolute', fontSize: 14, fontWeight: '600' },
-          textStyle,
-        ]}
-      >
+      <Text style={[styles.progressCircleText, textStyle]}>
         {currentStep} of {totalSteps}
       </Text>
     </View>
@@ -73,3 +68,15 @@ const ProgressCircle = (props: ProgressCircleProps) => {
 };
 
 export default ProgressCircle;
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  progressCircleText: {
+    position: 'absolute',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+});

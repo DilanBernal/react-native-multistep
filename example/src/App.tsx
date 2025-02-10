@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <MultiStep tintColor="#86A788" onSubmit={() => console.log('submit')}>
+      <MultiStep onSubmit={() => console.log('submit')}>
         <Step title="User Details">
           <TextInput placeholder="First name" style={styles.input} />
           <TextInput placeholder="Last name" style={styles.input} />
