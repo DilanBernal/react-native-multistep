@@ -17,7 +17,7 @@ const Step = (props: StepProps) => {
   const { children, style, ...rest } = props;
 
   return (
-    <View style={[styles.container, style]} {...rest}>
+    <View style={[styles.container, style]} {...rest} testID="step-container">
       {children}
     </View>
   );

@@ -6,7 +6,7 @@ import {
   Text,
   useWindowDimensions,
 } from 'react-native';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from './Button';
 import ProgressCircle from './ProgressCircle';
 import Animated, {
@@ -61,13 +61,11 @@ const MultiStep = (props: MultiStepProps) => {
 
   const COLOR = tintColor || '#DE3163';
 
-  const stepCountRef = useRef(React.Children.count(children));
+  const stepCount = React.useMemo(
+    () => React.Children.count(children),
+    [children]
+  );
 
-  useEffect(() => {
-    stepCountRef.current = React.Children.count(children);
-  }, [children]);
-
-  const stepCount = stepCountRef.current;
   const [currentStep, setCurrentStep] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
