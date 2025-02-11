@@ -16,7 +16,7 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 import Step from './Step';
-import type { MultiStepProps } from '../types';
+import type { MultiStepProps, StepProps } from '../types';
 
 /**
  * A multi-step container for managing step-based navigation.
@@ -104,22 +104,26 @@ const MultiStep = (props: MultiStepProps) => {
   };
 
   const { isValid, titles } = React.useMemo(() => {
+    const extractedTitles: Pick<
+      StepProps,
+      'title' | 'stepTitleStyle' | 'nextStepTitleStyle' | 'titleComponent'
+    >[] = [];
+
     let allValid = true;
 
-    const extractedTitles =
-      React.Children.map(children, (child) => {
-        if (!React.isValidElement(child) || child.type !== Step) {
-          allValid = false;
-          return null;
-        }
+    React.Children.forEach(children, (child) => {
+      if (!React.isValidElement(child) || child.type !== Step) {
+        allValid = false;
+        return;
+      }
 
-        return {
-          title: child.props.title || '',
-          stepTitleStyle: child.props.stepTitleStyle || {},
-          nextStepTitleStyle: child.props.nextStepTitleStyle || {},
-          titleComponent: child.props.titleComponent,
-        };
-      })?.filter(Boolean) || [];
+      extractedTitles.push({
+        title: child.props.title || '',
+        stepTitleStyle: child.props.stepTitleStyle || {},
+        nextStepTitleStyle: child.props.nextStepTitleStyle || {},
+        titleComponent: child.props.titleComponent,
+      });
+    });
 
     return { isValid: allValid, titles: extractedTitles };
   }, [children]);
