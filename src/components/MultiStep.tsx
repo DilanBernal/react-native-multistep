@@ -47,16 +47,21 @@ const MultiStep = (props: MultiStepProps) => {
     prevButtonComponent,
     nextButtonComponent,
     tintColor,
-    indicatorTitleStyle,
-    indicatorSubtitleStyle,
+    globalStepTitleStyle,
+    globalNextStepTitleStyle,
     progressCircleSize,
-    progressCircleStrokeWidth,
-    progressCircleTintColor,
-    progressCircleTextStyle,
+    progressCircleThickness,
+    progressCircleColor,
+    progressCircleTrackColor,
+    progressCircleLabelStyle,
     headerStyle,
-    formContainerStyle,
+    globalStepContainerStyle,
     buttonContainerStyle,
-    onSubmit,
+    onFinalStepSubmit,
+    submitButtonText,
+    submitButtonTextStyle,
+    submitButtonStyle,
+    submitButtonComponent,
   } = props;
 
   const COLOR = tintColor || '#DE3163';
@@ -109,8 +114,8 @@ const MultiStep = (props: MultiStepProps) => {
 
         return {
           title: child.props.title || '',
-          titleStyle: child.props.titleStyle || {},
-          subTitleStyle: child.props.subTitleStyle || {},
+          stepTitleStyle: child.props.stepTitleStyle || {},
+          nextStepTitleStyle: child.props.nextStepTitleStyle || {},
           titleComponent: child.props.titleComponent,
         };
       })?.filter(Boolean) || [];
@@ -133,6 +138,7 @@ const MultiStep = (props: MultiStepProps) => {
   }
 
   const currentTitle = titles[currentStep];
+  const isFinalStep = currentStep === stepCount - 1;
 
   return (
     <View style={styles.multiStepContainer}>
@@ -148,13 +154,12 @@ const MultiStep = (props: MultiStepProps) => {
           ) : (
             <Text
               style={[
+                styles.currentStepTect,
                 {
-                  fontSize: 18,
-                  fontWeight: '600',
                   color: COLOR,
                 },
-                indicatorTitleStyle,
-                currentTitle?.titleStyle,
+                globalStepTitleStyle,
+                currentTitle?.stepTitleStyle,
               ]}
             >
               {currentTitle?.title}
@@ -164,8 +169,8 @@ const MultiStep = (props: MultiStepProps) => {
           <Text
             style={[
               styles.nextStepText,
-              indicatorSubtitleStyle,
-              currentTitle?.subTitleStyle,
+              globalNextStepTitleStyle,
+              currentTitle?.nextStepTitleStyle,
             ]}
           >
             {currentStep < stepCount - 1
@@ -178,9 +183,10 @@ const MultiStep = (props: MultiStepProps) => {
           currentStep={currentStep + 1}
           totalSteps={titles.length}
           size={progressCircleSize}
-          strokeWidth={progressCircleStrokeWidth}
-          tintColor={progressCircleTintColor || COLOR}
-          textStyle={progressCircleTextStyle}
+          progressCircleThickness={progressCircleThickness}
+          progressColor={progressCircleColor || COLOR}
+          trackColor={progressCircleTrackColor}
+          progressCircleLabelStyle={progressCircleLabelStyle}
         />
       </View>
 
@@ -194,7 +200,11 @@ const MultiStep = (props: MultiStepProps) => {
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
           <View
-            style={[styles.stepContentContainer, { width }, formContainerStyle]}
+            style={[
+              styles.stepContentContainer,
+              { width },
+              globalStepContainerStyle,
+            ]}
           >
             {item}
           </View>
@@ -210,32 +220,47 @@ const MultiStep = (props: MultiStepProps) => {
           ) : (
             <Button
               title={prevButtonText || 'Back'}
-              varient="secondary"
+              variant="secondary"
               tintColor={COLOR}
               style={prevButtonStyle}
               textStyle={prevButtonTextStyle}
             />
           )}
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={currentStep === stepCount - 1 ? onSubmit : nextStep}
-        >
-          {nextButtonComponent ? (
-            nextButtonComponent
-          ) : (
-            <Button
-              title={
-                currentStep === stepCount - 1
-                  ? 'Submit'
-                  : nextButtonText || 'Next'
-              }
-              varient="primary"
-              tintColor={COLOR}
-              style={nextButtonStyle}
-              textStyle={nextButtonTextStyle}
-            />
-          )}
-        </TouchableOpacity>
+
+        {/* changes */}
+
+        {!isFinalStep && (
+          <TouchableOpacity onPress={nextStep}>
+            {nextButtonComponent ? (
+              nextButtonComponent
+            ) : (
+              <Button
+                title={nextButtonText || 'Next'}
+                variant="primary"
+                tintColor={COLOR}
+                style={nextButtonStyle}
+                textStyle={nextButtonTextStyle}
+              />
+            )}
+          </TouchableOpacity>
+        )}
+
+        {isFinalStep && (
+          <TouchableOpacity onPress={onFinalStepSubmit}>
+            {submitButtonComponent ? (
+              submitButtonComponent
+            ) : (
+              <Button
+                title={submitButtonText || 'Submit'}
+                variant="primary"
+                tintColor={COLOR}
+                style={submitButtonStyle}
+                textStyle={submitButtonTextStyle}
+              />
+            )}
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -246,7 +271,6 @@ export default MultiStep;
 const styles = StyleSheet.create({
   multiStepContainer: {
     flex: 1,
-    paddingTop: 20,
     gap: 10,
   },
   navigationHeader: {
@@ -260,6 +284,10 @@ const styles = StyleSheet.create({
   navigationItemWrapper: {
     flex: 1,
     gap: 10,
+  },
+  currentStepTect: {
+    fontSize: 18,
+    fontWeight: '600',
   },
   nextStepText: {
     color: '#45474B',

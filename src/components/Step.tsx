@@ -14,10 +14,13 @@ import type { StepProps } from '../types';
  */
 
 const Step = (props: StepProps) => {
-  const { children, style, ...rest } = props;
+  const { children, stepContainerStyle } = props;
 
   return (
-    <View style={[styles.container, style]} {...rest} testID="step-container">
+    <View
+      style={[styles.container, stepContainerStyle]}
+      testID="step-container"
+    >
       {children}
     </View>
   );

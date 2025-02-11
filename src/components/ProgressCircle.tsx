@@ -15,12 +15,13 @@ const ProgressCircle = (props: ProgressCircleProps) => {
     currentStep,
     totalSteps,
     size = 65,
-    strokeWidth = 5,
-    tintColor = '#DE3163',
-    textStyle,
+    progressCircleThickness = 5,
+    progressColor = '#DE3163',
+    trackColor = '#E0E0E0',
+    progressCircleLabelStyle,
   } = props;
 
-  const radius = (size - strokeWidth) / 2;
+  const radius = (size - progressCircleThickness) / 2;
   const circumference = 2 * Math.PI * radius;
 
   const progress = useSharedValue(0);
@@ -42,8 +43,8 @@ const ProgressCircle = (props: ProgressCircleProps) => {
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#E0E0E0"
-          strokeWidth={strokeWidth}
+          stroke={trackColor}
+          strokeWidth={progressCircleThickness}
           fill="none"
         />
 
@@ -51,8 +52,8 @@ const ProgressCircle = (props: ProgressCircleProps) => {
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke={tintColor}
-          strokeWidth={strokeWidth}
+          stroke={progressColor}
+          strokeWidth={progressCircleThickness}
           fill="none"
           strokeDasharray={circumference}
           animatedProps={animatedProps}
@@ -60,7 +61,7 @@ const ProgressCircle = (props: ProgressCircleProps) => {
         />
       </Svg>
 
-      <Text style={[styles.progressCircleText, textStyle]}>
+      <Text style={[styles.progressCircleText, progressCircleLabelStyle]}>
         {currentStep} of {totalSteps}
       </Text>
     </View>

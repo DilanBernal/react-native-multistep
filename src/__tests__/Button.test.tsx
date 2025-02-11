@@ -5,7 +5,7 @@ import Button from '../components/Button';
 describe('Button Component', () => {
   it('renders correctly with primary variant', () => {
     const { getByTestId, getByText } = render(
-      <Button title="Next" varient="primary" tintColor="#007AFF" />
+      <Button title="Next" variant="primary" tintColor="#007AFF" />
     );
 
     const button = getByTestId('button-container');
@@ -17,7 +17,7 @@ describe('Button Component', () => {
 
   it('renders correctly with secondary variant', () => {
     const { getByTestId, getByText } = render(
-      <Button title="Back" varient="secondary" tintColor="#FF0000" />
+      <Button title="Back" variant="secondary" tintColor="#FF0000" />
     );
 
     const button = getByTestId('button-container');
@@ -32,7 +32,7 @@ describe('Button Component', () => {
     const { getByTestId } = render(
       <Button
         title="Styled"
-        varient="primary"
+        variant="primary"
         tintColor="#000"
         style={{ paddingVertical: 20 }}
       />
@@ -48,7 +48,7 @@ describe('Button Component', () => {
     const { getByText } = render(
       <Button
         title="Custom Text"
-        varient="secondary"
+        variant="secondary"
         tintColor="#000"
         textStyle={{ fontSize: 18 }}
       />
