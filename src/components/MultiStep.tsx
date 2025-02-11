@@ -57,6 +57,10 @@ const MultiStep = (props: MultiStepProps) => {
     globalStepContainerStyle,
     buttonContainerStyle,
     onFinalStepSubmit,
+    submitButtonText,
+    submitButtonTextStyle,
+    submitButtonStyle,
+    submitButtonComponent,
   } = props;
 
   const COLOR = tintColor || '#DE3163';
@@ -133,6 +137,7 @@ const MultiStep = (props: MultiStepProps) => {
   }
 
   const currentTitle = titles[currentStep];
+  const isFinalStep = currentStep === stepCount - 1;
 
   return (
     <View style={styles.multiStepContainer}>
@@ -220,25 +225,40 @@ const MultiStep = (props: MultiStepProps) => {
             />
           )}
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={currentStep === stepCount - 1 ? onFinalStepSubmit : nextStep}
-        >
-          {nextButtonComponent ? (
-            nextButtonComponent
-          ) : (
-            <Button
-              title={
-                currentStep === stepCount - 1
-                  ? 'Submit'
-                  : nextButtonText || 'Next'
-              }
-              variant="primary"
-              tintColor={COLOR}
-              style={nextButtonStyle}
-              textStyle={nextButtonTextStyle}
-            />
-          )}
-        </TouchableOpacity>
+
+        {/* changes */}
+
+        {!isFinalStep && (
+          <TouchableOpacity onPress={nextStep}>
+            {nextButtonComponent ? (
+              nextButtonComponent
+            ) : (
+              <Button
+                title={nextButtonText || 'Next'}
+                variant="primary"
+                tintColor={COLOR}
+                style={nextButtonStyle}
+                textStyle={nextButtonTextStyle}
+              />
+            )}
+          </TouchableOpacity>
+        )}
+
+        {isFinalStep && (
+          <TouchableOpacity onPress={onFinalStepSubmit}>
+            {submitButtonComponent ? (
+              submitButtonComponent
+            ) : (
+              <Button
+                title={submitButtonText || 'Submit'}
+                variant="primary"
+                tintColor={COLOR}
+                style={submitButtonStyle}
+                textStyle={submitButtonTextStyle}
+              />
+            )}
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

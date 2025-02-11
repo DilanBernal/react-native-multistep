@@ -193,6 +193,29 @@ export interface MultiStepProps {
    * Callback function that is called when the user presses the submit button on the last step.
    */
   onFinalStepSubmit: () => void;
+
+  /**
+   * Text for the "Submit" button. Defaults to "Submit" if not provided.
+   */
+  submitButtonText?: string;
+
+  /**
+   * Style for the "Submit" button.
+   * Accepts a React Native `ViewStyle` object.
+   */
+  submitButtonStyle?: ViewStyle;
+
+  /**
+   * Style for the text inside the "Submit" button.
+   * Accepts a React Native `TextStyle` object.
+   */
+  submitButtonTextStyle?: TextStyle;
+
+  /**
+   * Custom component to replace the default "Submit" button.
+   * If provided, it will override `submitButtonText` and `submitButtonStyle`.
+   */
+  submitButtonComponent?: JSX.Element;
 }
 
 /**
