@@ -196,6 +196,12 @@ export interface MultiStepProps {
   globalStepContainerStyle?: ViewStyle;
 
   /**
+   * Style for the MultiStep container.
+   * Accepts a React Native `ViewStyle` object.
+   */
+  multiStepContainerStyle?: ViewStyle;
+
+  /**
    * Style for the button container.
    * Accepts a React Native `ViewStyle` object.
    */
