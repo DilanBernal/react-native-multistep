@@ -16,7 +16,7 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 import Step from './Step';
-import type { MultiStepProps } from '../types';
+import type { MultiStepProps, StepProps } from '../types';
 
 /**
  * A multi-step container for managing step-based navigation.
@@ -56,6 +56,7 @@ const MultiStep = (props: MultiStepProps) => {
     progressCircleLabelStyle,
     headerStyle,
     globalStepContainerStyle,
+    multiStepContainerStyle,
     buttonContainerStyle,
     onFinalStepSubmit,
     submitButtonText,
@@ -103,22 +104,26 @@ const MultiStep = (props: MultiStepProps) => {
   };
 
   const { isValid, titles } = React.useMemo(() => {
+    const extractedTitles: Pick<
+      StepProps,
+      'title' | 'stepTitleStyle' | 'nextStepTitleStyle' | 'titleComponent'
+    >[] = [];
+
     let allValid = true;
 
-    const extractedTitles =
-      React.Children.map(children, (child) => {
-        if (!React.isValidElement(child) || child.type !== Step) {
-          allValid = false;
-          return null;
-        }
+    React.Children.forEach(children, (child) => {
+      if (!React.isValidElement(child) || child.type !== Step) {
+        allValid = false;
+        return;
+      }
 
-        return {
-          title: child.props.title || '',
-          stepTitleStyle: child.props.stepTitleStyle || {},
-          nextStepTitleStyle: child.props.nextStepTitleStyle || {},
-          titleComponent: child.props.titleComponent,
-        };
-      })?.filter(Boolean) || [];
+      extractedTitles.push({
+        title: child.props.title || '',
+        stepTitleStyle: child.props.stepTitleStyle || {},
+        nextStepTitleStyle: child.props.nextStepTitleStyle || {},
+        titleComponent: child.props.titleComponent,
+      });
+    });
 
     return { isValid: allValid, titles: extractedTitles };
   }, [children]);
@@ -141,7 +146,7 @@ const MultiStep = (props: MultiStepProps) => {
   const isFinalStep = currentStep === stepCount - 1;
 
   return (
-    <View style={styles.multiStepContainer}>
+    <View style={[styles.multiStepContainer, multiStepContainerStyle]}>
       <View style={[styles.navigationHeader, headerStyle]}>
         <Animated.View
           style={styles.navigationItemWrapper}
@@ -199,15 +204,7 @@ const MultiStep = (props: MultiStepProps) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <View
-            style={[
-              styles.stepContentContainer,
-              { width },
-              globalStepContainerStyle,
-            ]}
-          >
-            {item}
-          </View>
+          <View style={[{ width }, globalStepContainerStyle]}>{item}</View>
         )}
         extraData={{ currentStep, stepCount }}
         itemLayoutAnimation={LinearTransition}
@@ -227,8 +224,6 @@ const MultiStep = (props: MultiStepProps) => {
             />
           )}
         </TouchableOpacity>
-
-        {/* changes */}
 
         {!isFinalStep && (
           <TouchableOpacity onPress={nextStep}>
@@ -270,8 +265,7 @@ export default MultiStep;
 
 const styles = StyleSheet.create({
   multiStepContainer: {
-    flex: 1,
-    gap: 10,
+    gap: 15,
   },
   navigationHeader: {
     flexDirection: 'row',
@@ -291,9 +285,6 @@ const styles = StyleSheet.create({
   },
   nextStepText: {
     color: '#45474B',
-  },
-  stepContentContainer: {
-    flex: 1,
   },
   buttonGroup: {
     flexDirection: 'row',

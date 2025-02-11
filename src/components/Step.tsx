@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import type { StepProps } from '../types';
 
 /**
@@ -17,19 +17,10 @@ const Step = (props: StepProps) => {
   const { children, stepContainerStyle } = props;
 
   return (
-    <View
-      style={[styles.container, stepContainerStyle]}
-      testID="step-container"
-    >
+    <View style={stepContainerStyle} testID="step-container">
       {children}
     </View>
   );
 };
 
 export default Step;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
