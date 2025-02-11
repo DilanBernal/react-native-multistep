@@ -66,10 +66,16 @@ export interface ProgressCircleProps {
   progressCircleThickness?: number;
 
   /**
-   * The color of the progress ring.
-   * Defaults to `#DE3163.
+   * The color of the filled (progress) portion of the circle.
+   * Defaults to `#DE3163`.
    */
-  tintColor?: string;
+  progressColor?: string;
+
+  /**
+   * The color of the unfilled (background) portion of the circle.
+   * Defaults to `#E0E0E0`.
+   */
+  trackColor?: string;
 
   /**
    * Style for the text inside the progress circle.
@@ -160,10 +166,16 @@ export interface MultiStepProps {
   progressCircleThickness?: number;
 
   /**
-   * The color of the progress ring.
+   * The color of the filled (progress) portion of the circle.
    * Defaults to `#DE3163`.
    */
-  progressCircleTintColor?: string;
+  progressCircleColor?: string;
+
+  /**
+   * The color of the unfilled (background) portion of the circle.
+   * Defaults to `#E0E0E0`.
+   */
+  progressCircleTrackColor?: string;
 
   /**
    * Style for the text inside the progress circle.

@@ -51,7 +51,8 @@ const MultiStep = (props: MultiStepProps) => {
     globalNextStepTitleStyle,
     progressCircleSize,
     progressCircleThickness,
-    progressCircleTintColor,
+    progressCircleColor,
+    progressCircleTrackColor,
     progressCircleLabelStyle,
     headerStyle,
     globalStepContainerStyle,
@@ -183,7 +184,8 @@ const MultiStep = (props: MultiStepProps) => {
           totalSteps={titles.length}
           size={progressCircleSize}
           progressCircleThickness={progressCircleThickness}
-          tintColor={progressCircleTintColor || COLOR}
+          progressColor={progressCircleColor || COLOR}
+          trackColor={progressCircleTrackColor}
           progressCircleLabelStyle={progressCircleLabelStyle}
         />
       </View>

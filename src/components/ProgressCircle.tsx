@@ -16,7 +16,8 @@ const ProgressCircle = (props: ProgressCircleProps) => {
     totalSteps,
     size = 65,
     progressCircleThickness = 5,
-    tintColor = '#DE3163',
+    progressColor = '#DE3163',
+    trackColor = '#E0E0E0',
     progressCircleLabelStyle,
   } = props;
 
@@ -42,7 +43,7 @@ const ProgressCircle = (props: ProgressCircleProps) => {
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#E0E0E0"
+          stroke={trackColor}
           strokeWidth={progressCircleThickness}
           fill="none"
         />
@@ -51,7 +52,7 @@ const ProgressCircle = (props: ProgressCircleProps) => {
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke={tintColor}
+          stroke={progressColor}
           strokeWidth={progressCircleThickness}
           fill="none"
           strokeDasharray={circumference}
