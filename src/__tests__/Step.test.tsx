@@ -17,7 +17,7 @@ describe('Step Component', () => {
     const { getByTestId } = render(
       <Step
         title="Step 1"
-        style={{
+        stepContainerStyle={{
           padding: 10,
         }}
       >

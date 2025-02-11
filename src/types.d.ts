@@ -1,6 +1,6 @@
 import { ViewProps, ViewStyle, TextStyle } from 'react-native';
 
-export interface StepProps extends ViewProps {
+export interface StepProps {
   /**
    * The title of the step.
    * This is displayed as the step's label.
@@ -8,16 +8,16 @@ export interface StepProps extends ViewProps {
   title: string;
 
   /**
-   * Style for the title text.
+   * Style for the step title text.
    * Accepts a React Native `TextStyle` object.
    */
-  titleStyle?: TextStyle;
+  stepTitleStyle?: TextStyle;
 
   /**
-   * Style for the subtitle text.
+   * Style for the next step title text.
    * Accepts a React Native `TextStyle` object.
    */
-  subTitleStyle?: TextStyle;
+  nextStepTitleStyle?: TextStyle;
 
   /**
    * Custom component for the title.
@@ -29,6 +29,12 @@ export interface StepProps extends ViewProps {
    * This can be any React component or elements.
    */
   children: React.ReactNode;
+
+  /**
+   * Style for the step container.
+   * Accepts a React Native `ViewStyle` object.
+   */
+  stepContainerStyle?: ViewStyle;
 }
 
 /**
@@ -57,7 +63,7 @@ export interface ProgressCircleProps {
    * The thickness of the progress ring.
    * Defaults to `5`.
    */
-  strokeWidth?: number;
+  progressCircleThickness?: number;
 
   /**
    * The color of the progress ring.
@@ -69,7 +75,7 @@ export interface ProgressCircleProps {
    * Style for the text inside the progress circle.
    * Accepts a React Native `TextStyle` object.
    */
-  textStyle?: TextStyle;
+  progressCircleLabelStyle?: TextStyle;
 }
 
 /**
@@ -130,14 +136,16 @@ export interface MultiStepProps {
   tintColor?: string;
 
   /**
-   * Style for the step indicator titles.
+   * Global style for the step title text.
+   * Accepts a React Native `TextStyle` object.
    */
-  indicatorTitleStyle?: TextStyle;
+  globalStepTitleStyle?: TextStyle;
 
   /**
-   * Style for the step indicator subtitles.
+   * Global style for the next step title text.
+   * Accepts a React Native `TextStyle` object.
    */
-  indicatorSubtitleStyle?: TextStyle;
+  globalNextStepTitleStyle?: TextStyle;
 
   /**
    * The size (diameter) of the circular progress indicator in pixels.
@@ -149,7 +157,7 @@ export interface MultiStepProps {
    * The thickness of the progress ring.
    * Defaults to `5`.
    */
-  progressCircleStrokeWidth?: number;
+  progressCircleThickness?: number;
 
   /**
    * The color of the progress ring.
@@ -161,7 +169,7 @@ export interface MultiStepProps {
    * Style for the text inside the progress circle.
    * Accepts a React Native `TextStyle` object.
    */
-  progressCircleTextStyle?: TextStyle;
+  progressCircleLabelStyle?: TextStyle;
 
   /**
    * Style for the header where the title and progress bar are shown.
@@ -173,7 +181,7 @@ export interface MultiStepProps {
    * Style for the form container.
    * Accepts a React Native `ViewStyle` object.
    */
-  formContainerStyle?: ViewStyle;
+  globalStepContainerStyle?: ViewStyle;
 
   /**
    * Style for the button container.
@@ -184,7 +192,7 @@ export interface MultiStepProps {
   /**
    * Callback function that is called when the user presses the submit button on the last step.
    */
-  onSubmit: () => void;
+  onFinalStepSubmit: () => void;
 }
 
 /**
@@ -203,7 +211,7 @@ export interface ButtonProps extends ViewProps {
    * - `primary`: A solid button using the main `tintColor`.
    * - `secondary`: An outline button with a border matching `tintColor`.
    */
-  varient: 'primary' | 'secondary';
+  variant: 'primary' | 'secondary';
 
   /**
    * The main color used for the button.

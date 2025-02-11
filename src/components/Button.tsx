@@ -17,7 +17,7 @@ import type { ButtonProps } from '../types';
  */
 
 const Button = (props: ButtonProps) => {
-  const { title, varient, tintColor, style, textStyle } = props;
+  const { title, variant, tintColor, style, textStyle } = props;
 
   return (
     <View
@@ -25,8 +25,8 @@ const Button = (props: ButtonProps) => {
       style={[
         styles.container,
         {
-          backgroundColor: varient === 'primary' ? tintColor : 'white',
-          borderWidth: varient === 'secondary' ? 1 : 0,
+          backgroundColor: variant === 'primary' ? tintColor : 'white',
+          borderWidth: variant === 'secondary' ? 1 : 0,
           borderColor: tintColor,
         },
         style,
@@ -36,7 +36,7 @@ const Button = (props: ButtonProps) => {
         style={[
           styles.buttonText,
           {
-            color: varient === 'primary' ? 'white' : tintColor,
+            color: variant === 'primary' ? 'white' : tintColor,
           },
           textStyle,
         ]}
