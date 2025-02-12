@@ -56,7 +56,7 @@ const MultiStep = (props: MultiStepProps) => {
     progressCircleLabelStyle,
     headerStyle,
     globalStepContainerStyle,
-    multiStepContainerStyle,
+    fullScreenHeight,
     buttonContainerStyle,
     onFinalStepSubmit,
     submitButtonText,
@@ -146,7 +146,14 @@ const MultiStep = (props: MultiStepProps) => {
   const isFinalStep = currentStep === stepCount - 1;
 
   return (
-    <View style={[styles.multiStepContainer, multiStepContainerStyle]}>
+    <View
+      style={[
+        styles.multiStepContainer,
+        fullScreenHeight && {
+          flex: 1,
+        },
+      ]}
+    >
       <View style={[styles.navigationHeader, headerStyle]}>
         <Animated.View
           style={styles.navigationItemWrapper}
@@ -204,7 +211,11 @@ const MultiStep = (props: MultiStepProps) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={[{ width }, globalStepContainerStyle]}>{item}</View>
+          <View
+            style={[styles.stepContainer, { width }, globalStepContainerStyle]}
+          >
+            {item}
+          </View>
         )}
         extraData={{ currentStep, stepCount }}
         itemLayoutAnimation={LinearTransition}
@@ -278,6 +289,9 @@ const styles = StyleSheet.create({
   navigationItemWrapper: {
     flex: 1,
     gap: 10,
+  },
+  stepContainer: {
+    paddingHorizontal: 15,
   },
   currentStepTect: {
     fontSize: 18,
