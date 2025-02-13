@@ -22,7 +22,7 @@ export interface StepProps {
   /**
    * Custom component for the title.
    */
-  titleComponent?: () => JSX.Element;
+  titleComponent?: JSX.Element;
 
   /**
    * The content of the step.
@@ -190,16 +190,16 @@ export interface MultiStepProps {
   headerStyle?: ViewStyle;
 
   /**
-   * Style for the form container.
+   * Global style for the step container.
    * Accepts a React Native `ViewStyle` object.
    */
   globalStepContainerStyle?: ViewStyle;
 
   /**
-   * Style for the MultiStep container.
-   * Accepts a React Native `ViewStyle` object.
+   * If true, the step will take the entire available screen height.
+   * Defaults to `false`.
    */
-  multiStepContainerStyle?: ViewStyle;
+  fullScreenHeight?: boolean;
 
   /**
    * Style for the button container.
