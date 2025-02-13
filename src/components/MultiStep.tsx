@@ -305,5 +305,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 15,
+    marginTop: 10,
   },
 });
