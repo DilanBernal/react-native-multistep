@@ -30,7 +30,7 @@ const CustomDesign = () => {
     >
       <Step
         title="User Info"
-        titleComponent={() => <StepTitle title="User Info" icon="user" />}
+        titleComponent={<StepTitle title="User Info" icon="user" />}
         stepContainerStyle={styles.stepContent}
       >
         <Text style={styles.label}>Username</Text>
@@ -52,7 +52,7 @@ const CustomDesign = () => {
 
       <Step
         title="Security"
-        titleComponent={() => <StepTitle title="Security" icon="lock" />}
+        titleComponent={<StepTitle title="Security" icon="lock" />}
         stepContainerStyle={styles.stepContent}
       >
         <Text style={styles.label}>Password</Text>
@@ -67,7 +67,7 @@ const CustomDesign = () => {
 
       <Step
         title="Additional Info"
-        titleComponent={() => <StepTitle title="Additional Info" icon="info" />}
+        titleComponent={<StepTitle title="Additional Info" icon="info" />}
         stepContainerStyle={styles.stepContent}
       >
         <Text style={styles.label}>Age</Text>
@@ -85,7 +85,13 @@ const CustomDesign = () => {
 
 export default CustomDesign;
 
-const StepTitle = ({ title, icon }: { title: string; icon: string }) => (
+const StepTitle = ({
+  title,
+  icon,
+}: {
+  title: string;
+  icon: 'user' | 'lock' | 'info';
+}) => (
   <View style={styles.stepTitleContainer}>
     <FontAwesome name={icon} size={20} color="#000" />
     <Text style={styles.stepTitle}>{title}</Text>

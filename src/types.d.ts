@@ -22,7 +22,7 @@ export interface StepProps {
   /**
    * Custom component for the title.
    */
-  titleComponent?: () => JSX.Element;
+  titleComponent?: JSX.Element;
 
   /**
    * The content of the step.

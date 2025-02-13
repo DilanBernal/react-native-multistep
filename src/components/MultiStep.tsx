@@ -162,7 +162,7 @@ const MultiStep = (props: MultiStepProps) => {
           key={currentStep}
         >
           {currentTitle?.titleComponent ? (
-            <currentTitle.titleComponent />
+            currentTitle.titleComponent
           ) : (
             <Text
               style={[
