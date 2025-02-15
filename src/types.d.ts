@@ -264,3 +264,24 @@ export interface ButtonProps extends ViewProps {
    */
   textStyle?: TextStyle;
 }
+
+/**
+ * Ref object for controlling the MultiStep component's navigation.
+ * This allows users to programmatically navigate between steps.
+ */
+export interface MultiStepRef {
+  /**
+   * Advances to the next step in the multi-step process.
+   */
+  nextStep: () => void;
+
+  /**
+   * Moves back to the previous step in the multi-step process.
+   */
+  prevStep: () => void;
+
+  /**
+   * Scrolls to a specific step in the multi-step process.
+   */
+  scrollToStep: (index: number) => void;
+}

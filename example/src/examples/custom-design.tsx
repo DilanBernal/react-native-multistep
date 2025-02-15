@@ -1,6 +1,12 @@
-import { useState } from 'react';
-import { Text, TextInput, StyleSheet, View } from 'react-native';
-import { MultiStep, Step } from 'react-native-multistep';
+import { useState, useRef } from 'react';
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import { MultiStep, Step, type MultiStepRef } from 'react-native-multistep';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 const CustomDesign = () => {
@@ -19,14 +25,21 @@ const CustomDesign = () => {
     console.log('Final Form Data:', formData);
   };
 
+  const ref = useRef<MultiStepRef>(null);
+
   return (
     <MultiStep
       onFinalStepSubmit={handleSubmit}
       tintColor="#AD49E1"
       progressCircleColor="#FFAF00"
-      nextButtonComponent={<NextButton />}
-      prevButtonComponent={<PrevButton />}
-      submitButtonComponent={<SubmitButton />}
+      nextButtonComponent={
+        <NextButton onPress={() => ref.current?.nextStep()} />
+      }
+      prevButtonComponent={
+        <PrevButton onPress={() => ref.current?.prevStep()} />
+      }
+      submitButtonComponent={<SubmitButton onPress={handleSubmit} />}
+      ref={ref}
     >
       <Step
         title="User Info"
@@ -98,25 +111,25 @@ const StepTitle = ({
   </View>
 );
 
-const NextButton = () => (
-  <View style={styles.nextButton}>
+const NextButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity style={styles.nextButton} onPress={onPress}>
     <Text style={styles.buttonText}>Next</Text>
     <MaterialIcons name="arrow-forward-ios" size={18} color="white" />
-  </View>
+  </TouchableOpacity>
 );
 
-const PrevButton = () => (
-  <View style={styles.prevButton}>
+const PrevButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity style={styles.prevButton} onPress={onPress}>
     <MaterialIcons name="arrow-back-ios" size={18} color="white" />
     <Text style={styles.buttonText}>Back</Text>
-  </View>
+  </TouchableOpacity>
 );
 
-const SubmitButton = () => (
-  <View style={styles.submitButton}>
+const SubmitButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity style={styles.submitButton} onPress={onPress}>
     <Text style={styles.buttonText}>Submit</Text>
     <FontAwesome name="check-circle" size={18} color="white" />
-  </View>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
