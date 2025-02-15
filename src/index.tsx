@@ -1,8 +1,5 @@
 import MultiStep from './components/MultiStep';
 import Step from './components/Step';
+import { type MultiStepRef } from './types';
 
-export function multiply(a: number, b: number): number {
-  return a * b;
-}
-
-export { MultiStep, Step };
+export { MultiStep, Step, type MultiStepRef };

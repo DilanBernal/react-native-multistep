@@ -6,7 +6,12 @@ import {
   Text,
   useWindowDimensions,
 } from 'react-native';
-import React, { useState, useRef } from 'react';
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import Button from './Button';
 import ProgressCircle from './ProgressCircle';
 import Animated, {
@@ -16,7 +21,7 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 import Step from './Step';
-import type { MultiStepProps, StepProps } from '../types';
+import type { MultiStepProps, StepProps, MultiStepRef } from '../types';
 
 /**
  * A multi-step container for managing step-based navigation.
@@ -35,7 +40,7 @@ import type { MultiStepProps, StepProps } from '../types';
  * ```
  */
 
-const MultiStep = (props: MultiStepProps) => {
+const MultiStep = forwardRef<MultiStepRef, MultiStepProps>((props, ref) => {
   const {
     children,
     prevButtonText,
@@ -102,6 +107,17 @@ const MultiStep = (props: MultiStepProps) => {
       });
     }
   };
+
+  useImperativeHandle(ref, () => ({
+    nextStep,
+    prevStep,
+    scrollToStep: (index) => {
+      if (index >= 0 && index < stepCount) {
+        setCurrentStep(index);
+        flatListRef.current?.scrollToIndex({ index, animated: true });
+      }
+    },
+  }));
 
   const { isValid, titles } = React.useMemo(() => {
     const extractedTitles: Pick<
@@ -270,7 +286,7 @@ const MultiStep = (props: MultiStepProps) => {
       </View>
     </View>
   );
-};
+});
 
 export default MultiStep;
 
