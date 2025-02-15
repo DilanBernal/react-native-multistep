@@ -2,7 +2,13 @@
 
 A lightweight multi-step view component for React Native with smooth transitions using Reanimated
 
-![MultiStep Demo](example/assets/images/example_1.gif)
+![MultiStep Demo](example/assets/images/example_1.png)
+
+<p align="center">
+  <img src="example/assets/images/example_1.gif" style="height:400px; width:auto;" />
+  <img src="example/assets/images/example_2.gif" style="height:400px; width:auto;" />
+  <img src="example/assets/images/example_3.gif" style="height:400px; width:auto;" />
+</p>
 
 ## Installation
 
@@ -65,7 +71,7 @@ export default App;
 
 You can customize the styling of the `MultiStep` and `Step` components to match your app's aesthetics. The provided table lists all the available properties that you can use to adjust the appearance and behavior of the multi-step process. This includes customizing button styles, text styles, progress indicators, and container styles.
 
-![MultiStep Demo](example/assets/images/example_2.gif)
+![MultiStep Demo](example/assets/images/example_2.png)
 
 ### Example: Custom Styling
 
@@ -239,7 +245,7 @@ const styles = StyleSheet.create({
 
 You can also provide custom components for titles, buttons, and much more. This allows for greater flexibility and customization to match your app's design and functionality.
 
-![MultiStep Demo](example/assets/images/example_3.gif)
+![MultiStep Demo](example/assets/images/example_3.png)
 
 ### Example: Custom Components
 
@@ -635,6 +641,16 @@ The `StepProps` interface defines the properties for a single step in a multi-st
 - **Optional Fields**: All other properties are optional.
 - **Overrides**: The `titleComponent` property will override the `title` if provided.
 
+
+## MultiStepRef
+
+The `MultiStepRef` interface defines the methods available for controlling the `MultiStep` component's navigation programmatically.
+
+| Method          | Type                | Description                                                         |
+|-----------------|---------------------|---------------------------------------------------------------------|
+| `nextStep`      | `() => void`        | Advances to the next step in the multi-step process.                |
+| `prevStep`      | `() => void`        | Moves back to the previous step in the multi-step process.          |
+| `scrollToStep`  | `(index: number) => void` | Scrolls to a specific step in the multi-step process.                |
 
 ## Contributing
 
