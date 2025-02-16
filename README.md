@@ -25,15 +25,19 @@ This package relies on the following peer dependencies. Make sure they are insta
    ```bash
    npm install react-native-reanimated
    ```
-   Follow the [official installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation) to set it up correctly.
+   Follow the [official installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) to set it up correctly.
 
 2. **`react-native-svg`**
    This library is used for rendering SVG graphics.
    Install it using:
    ```bash
-   npm install react-native-svg@>=15.0.0
+   npx expo install react-native-svg
    ```
-   Follow the [official installation guide](https://github.com/software-mansion/react-native-svg#installation) to configure it properly.
+   or
+    ```bash
+    npm install react-native-svg
+    ```
+   Follow the [official installation guide](https://www.npmjs.com/package/react-native-svg) to configure it properly.
 
 
 ### Notes:
@@ -76,15 +80,15 @@ export default App;
 
 You can customize the styling of the `MultiStep` and `Step` components to match your app's aesthetics. The provided table lists all the available properties that you can use to adjust the appearance and behavior of the multi-step process. This includes customizing button styles, text styles, progress indicators, and container styles.
 
+### Example: Custom Styling
+
+Here's an example of how to apply custom styling to the `MultiStep` and `Step` components:
+
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
   <img src="example/assets/images/example_2/example_1.png" alt="video 1" width="250"/>
   <img src="example/assets/images/example_2/example_2.png" alt="video 2" width="250"/>
   <img src="example/assets/images/example_2/example_3.png" alt="video 3" width="250"/>
 </div>
-
-### Example: Custom Styling
-
-Here's an example of how to apply custom styling to the `MultiStep` and `Step` components:
 
 ```js
 import { useState } from 'react';
@@ -254,15 +258,15 @@ const styles = StyleSheet.create({
 
 You can also provide custom components for titles, buttons, and much more. This allows for greater flexibility and customization to match your app's design and functionality.
 
+### Example: Custom Components
+
+Here's an example of how to use custom components for the step titles and buttons:
+
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
   <img src="example/assets/images/example_3/example_1.png" alt="video 1" width="250"/>
   <img src="example/assets/images/example_3/example_2.png" alt="video 2" width="250"/>
   <img src="example/assets/images/example_3/example_3.png" alt="video 3" width="250"/>
 </div>
-
-### Example: Custom Components
-
-Here's an example of how to use custom components for the step titles and buttons:
 
 ```js
 import { useState, useRef } from 'react';
@@ -605,7 +609,7 @@ The `MultiStepProps` interface defines the properties for the `MultiStep` compon
 | Property                     | Type                     | Required | Default Value               | Description                                                                 |
 |------------------------------|--------------------------|----------|-----------------------------|-----------------------------------------------------------------------------|
 | `children`                   | `React.ReactNode`        | Yes      | -                           | The steps or content to be rendered inside the multi-step view. Typically an array of `Step` components. |
-| `onFinalStepSubmit`          | `() => void`             | Yes      | -                           | Callback function that is called when the user presses the submit button on the last step. |
+| `onFinalStepSubmit`          | `() => void`             | No      | -                           | Callback function that is called when the user presses the submit button on the last step. |
 | `prevButtonText`             | `string`                 | No       | `"Back"`                    | Text for the "Previous" button.                                             |
 | `nextButtonText`             | `string`                 | No       | `"Next"`                    | Text for the "Next" button.                                                 |
 | `prevButtonStyle`            | `ViewStyle`              | No       | -                           | Style for the "Previous" button container.                                  |
