@@ -654,11 +654,6 @@ The `MultiStepProps` interface defines the properties for the `MultiStep` compon
 | `submitButtonTextStyle`      | `TextStyle`              | No       | -                           | Style for the text inside the "Submit" button. Accepts a React Native `TextStyle` object. |
 | `submitButtonComponent`      | `JSX.Element`            | No       | -                           | Custom component to replace the default "Submit" button. Overrides `submitButtonText` and `submitButtonStyle`. |
 
-### Notes:
-- **Required Fields**: `children` and `onFinalStepSubmit` are required properties.
-- **Optional Fields**: All other properties are optional and have default values if not provided.
-- **Overrides**: Custom components like `prevButtonComponent`, `nextButtonComponent`, and `submitButtonComponent` will override their respective text and style propertiess
-
 # StepProps
 
 The `StepProps` interface defines the properties for a single step in a multi-step process.
@@ -671,12 +666,6 @@ The `StepProps` interface defines the properties for a single step in a multi-st
 | `nextStepTitleStyle` | `TextStyle`              | No       | -             | Style for the next step title text. Accepts a React Native `TextStyle` object. |
 | `titleComponent`     | `() => JSX.Element`      | No       | -             | Custom component for the title. Overrides `title` if provided.              |
 | `stepContainerStyle` | `ViewStyle`              | No       | -             | Style for the step container. Accepts a React Native `ViewStyle` object.    |
-
-### Notes:
-- **Required Fields**: `title` and `children` are required properties.
-- **Optional Fields**: All other properties are optional.
-- **Overrides**: The `titleComponent` property will override the `title` if provided.
-
 
 ## MultiStepRef
 
