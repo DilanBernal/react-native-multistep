@@ -20,7 +20,11 @@ const GettingStarted = () => {
   };
 
   return (
-    <MultiStep onFinalStepSubmit={handleSubmit} tintColor="#007AFF">
+    <MultiStep
+      onFinalStepSubmit={handleSubmit}
+      tintColor="#007AFF"
+      fullScreenHeight
+    >
       <Step title="Personal Info" stepContainerStyle={styles.stepContent}>
         <Text style={styles.label}>Full Name</Text>
         <TextInput

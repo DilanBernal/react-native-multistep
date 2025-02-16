@@ -210,7 +210,7 @@ export interface MultiStepProps {
   /**
    * Callback function that is called when the user presses the submit button on the last step.
    */
-  onFinalStepSubmit: () => void;
+  onFinalStepSubmit?: () => void;
 
   /**
    * Text for the "Submit" button. Defaults to "Submit" if not provided.
