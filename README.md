@@ -2,13 +2,12 @@
 
 A lightweight multi-step view component for React Native with smooth transitions using Reanimated
 
-![MultiStep Demo](example/assets/images/example_1.png)
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+  <img src="example/assets/images/example_1/example_1.gif" alt="video 1" width="250"/>
+  <img src="example/assets/images/example_2/example_2.gif" alt="video 2" width="250"/>
+  <img src="example/assets/images/example_3/example_3.gif" alt="video 3" width="250"/>
+</div>
 
-<p align="center">
-  <img src="example/assets/images/example_1.gif" style="height:400px; width:auto;" />
-  <img src="example/assets/images/example_2.gif" style="height:400px; width:auto;" />
-  <img src="example/assets/images/example_3.gif" style="height:400px; width:auto;" />
-</p>
 
 ## Installation
 
@@ -43,6 +42,12 @@ This package relies on the following peer dependencies. Make sure they are insta
 
 ## Usage
 
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+  <img src="example/assets/images/example_1/example_1.png" alt="video 1" width="250"/>
+  <img src="example/assets/images/example_1/example_2.png" alt="video 2" width="250"/>
+  <img src="example/assets/images/example_1/example_3.png" alt="video 3" width="250"/>
+</div>
+
 
 ```js
 import { Text, View } from 'react-native';
@@ -71,7 +76,11 @@ export default App;
 
 You can customize the styling of the `MultiStep` and `Step` components to match your app's aesthetics. The provided table lists all the available properties that you can use to adjust the appearance and behavior of the multi-step process. This includes customizing button styles, text styles, progress indicators, and container styles.
 
-![MultiStep Demo](example/assets/images/example_2.png)
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+  <img src="example/assets/images/example_2/example_1.png" alt="video 1" width="250"/>
+  <img src="example/assets/images/example_2/example_2.png" alt="video 2" width="250"/>
+  <img src="example/assets/images/example_2/example_3.png" alt="video 3" width="250"/>
+</div>
 
 ### Example: Custom Styling
 
@@ -245,7 +254,11 @@ const styles = StyleSheet.create({
 
 You can also provide custom components for titles, buttons, and much more. This allows for greater flexibility and customization to match your app's design and functionality.
 
-![MultiStep Demo](example/assets/images/example_3.png)
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+  <img src="example/assets/images/example_3/example_1.png" alt="video 1" width="250"/>
+  <img src="example/assets/images/example_3/example_2.png" alt="video 2" width="250"/>
+  <img src="example/assets/images/example_3/example_3.png" alt="video 3" width="250"/>
+</div>
 
 ### Example: Custom Components
 
