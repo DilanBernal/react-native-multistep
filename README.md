@@ -9,6 +9,25 @@ A lightweight multi-step view component for React Native with smooth transitions
 </div>
 
 
+## Table of Contents
+
+1. [Installation](#installation)
+   - [Peer Dependencies](#peer-dependencies)
+   - [Notes](#notes)
+2. [Usage](#usage)
+3. [Customizing and Styling](#customizing-and-styling)
+   - [Example: Custom Styling](#example-custom-styling)
+4. [Custom Components](#custom-components)
+   - [Example: Custom Components](#example-custom-components)
+5. [Using react-hook-form with react-native-multistep](#using-react-hook-form-with-react-native-multistep)
+   - [Example: Integrating react-hook-form](#example-integrating-react-hook-form)
+6. [MultiStepProps](#multistepprops)
+7. [StepProps](#stepprops)
+8. [MultiStepRef](#multistepref)
+9. [Contributing](#contributing)
+10. [License](#license)
+
+
 ## Installation
 
 ```sh
@@ -662,6 +681,59 @@ The `StepProps` interface defines the properties for a single step in a multi-st
 ## MultiStepRef
 
 The `MultiStepRef` interface defines the methods available for controlling the `MultiStep` component's navigation programmatically.
+To use the methods available in the `MultiStepRef` interface, you need to pass a ref to the `MultiStep` component. This allows you to programmatically control the navigation between steps.
+
+Here's an example demonstrating how to pass a ref to `MultiStep` and use its methods:
+
+```js
+import { useRef } from 'react';
+import { Text, View, Button } from 'react-native';
+import { MultiStep, Step, type MultiStepRef } from 'react-native-multistep';
+
+const App = () => {
+  const multiStepRef = useRef<MultiStepRef>(null);
+
+  const goToNextStep = () => {
+    multiStepRef.current?.nextStep();
+  };
+
+  const goToPreviousStep = () => {
+    multiStepRef.current?.prevStep();
+  };
+
+  const goToSpecificStep = (index: number) => {
+    multiStepRef.current?.scrollToStep(index);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <MultiStep ref={multiStepRef} onFinalStepSubmit={() => alert('Submitted!')}>
+        <Step title="Step 1">
+          <Text>Welcome to Step 1</Text>
+        </Step>
+        <Step title="Step 2">
+          <Text>Fill in some details here.</Text>
+        </Step>
+        <Step title="Step 3">
+          <Text>Review your information.</Text>
+        </Step>
+      </MultiStep>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
+        <Button title="Previous" onPress={goToPreviousStep} />
+        <Button title="Next" onPress={goToNextStep} />
+        <Button title="Go to Step 2" onPress={() => goToSpecificStep(1)} />
+      </View>
+    </View>
+  );
+};
+
+export default App;
+```
+
+In this example:
+- A ref (`multiStepRef`) is created using `useRef` and passed to the `MultiStep` component.
+- The `goToNextStep`, `goToPreviousStep`, and `goToSpecificStep` functions use the methods from the `MultiStepRef` interface to navigate between steps.
+- Buttons are provided to trigger these functions and demonstrate the navigation.
 
 | Method          | Type                | Description                                                         |
 |-----------------|---------------------|---------------------------------------------------------------------|
