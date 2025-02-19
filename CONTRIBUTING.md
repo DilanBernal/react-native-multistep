@@ -4,6 +4,39 @@ Contributions are always welcome, no matter how large or small!
 
 We want this community to be friendly and respectful to each other. Please follow it in all your interactions with the project. Before contributing, please read the [code of conduct](./CODE_OF_CONDUCT.md).
 
+## Component Structure
+
+The `react-native-multistep` library is organized as follows:
+
+```
+src/
+├── __tests__/           # Test files
+│   ├── Button.test.tsx
+│   └── Step.test.tsx
+├── components/          # React component files
+│   ├── Button.tsx      # Custom button component
+│   ├── MultiStep.tsx   # Main container component
+│   ├── ProgressCircle.tsx  # Progress indicator component
+│   └── Step.tsx        # Individual step component
+├── index.tsx           # Main entry point
+└── types.ts            # TypeScript type definitions
+```
+
+### Key Components
+
+- **MultiStep**: The main container component that orchestrates the multi-step flow
+- **Step**: Component for rendering individual step content
+- **ProgressCircle**: Visual indicator showing current step progress
+- **Button**: Custom button component for navigation between steps
+
+### Type Definitions
+
+The `types.ts` file contains all TypeScript interfaces and types used throughout the library. These define the shape of props and state for all components.
+
+### Tests
+
+Unit tests are located in the `__tests__` directory, with test files corresponding to their respective components.
+
 ## Development workflow
 
 This project is a monorepo managed using [Yarn workspaces](https://yarnpkg.com/features/workspaces). It contains the following packages:
