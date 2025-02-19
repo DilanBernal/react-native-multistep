@@ -1,5 +1,5 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
-import GettingStarted from './examples/getting-started';
+import BasicUsage from './examples/basic-usage';
 
 /**
  * You can import other example files from the "examples" folder
@@ -9,7 +9,7 @@ import GettingStarted from './examples/getting-started';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <GettingStarted />
+      <BasicUsage />
     </SafeAreaView>
   );
 }
