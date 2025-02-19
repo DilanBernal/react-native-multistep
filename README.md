@@ -65,6 +65,30 @@ This package relies on the following peer dependencies. Make sure they are insta
 
 ## Usage
 
+```js
+import { MultiStep, Step } from 'react-native-multistep';
+import { Text } from 'react-native';
+
+const BasicUsage = () => {
+  return (
+    <MultiStep fullScreenHeight>
+      <Step title="Step 1">
+        <Text>Content for Step 1</Text>
+      </Step>
+      <Step title="Step 2">
+        <Text>Content for Step 2</Text>
+      </Step>
+    </MultiStep>
+  );
+};
+
+export default BasicUsage;
+````
+
+## Example: Using Input Fields with MultiStep
+
+Here's an example of how to apply custom styling to the `MultiStep` and `Step` components:
+
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
   <img src="example/assets/images/example_1/example_1.png" alt="video 1" width="250"/>
   <img src="example/assets/images/example_1/example_2.png" alt="video 2" width="250"/>
