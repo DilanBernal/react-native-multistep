@@ -1,4 +1,4 @@
-import { ViewProps, ViewStyle, TextStyle } from 'react-native';
+import { type ViewProps, type ViewStyle, type TextStyle } from 'react-native';
 
 export interface StepProps {
   /**
