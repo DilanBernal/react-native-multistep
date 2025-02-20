@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 
 const GettingStarted = () => {
   const [formData, setFormData] = useState({

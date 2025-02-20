@@ -6,7 +6,11 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { MultiStep, Step, type MultiStepRef } from 'react-native-multistep';
+import {
+  MultiStep,
+  Step,
+  type MultiStepRef,
+} from '@brijen/react-native-multistep';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 const CustomDesign = () => {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-multistep": ["./src/index"]
+      "@brijen/react-native-multistep": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

@@ -1,4 +1,4 @@
-# react-native-multistep
+# @brijen/react-native-multistep
 
 A lightweight multi-step view component for React Native with smooth transitions using Reanimated
 
@@ -19,7 +19,7 @@ A lightweight multi-step view component for React Native with smooth transitions
    - [Example: Custom Styling](#example-custom-styling)
 4. [Custom Components](#custom-components)
    - [Example: Custom Components](#example-custom-components)
-5. [Using react-hook-form with react-native-multistep](#using-react-hook-form-with-react-native-multistep)
+5. [Using react-hook-form with @brijen/react-native-multistep](#using-react-hook-form-with-brijenreact-native-multistep)
    - [Example: Integrating react-hook-form](#example-integrating-react-hook-form)
 6. [MultiStepProps](#multistepprops)
 7. [StepProps](#stepprops)
@@ -31,7 +31,7 @@ A lightweight multi-step view component for React Native with smooth transitions
 ## Installation
 
 ```sh
-npm install react-native-multistep
+npm install @brijen/react-native-multistep
 ```
 
 ### Peer Dependencies
@@ -66,7 +66,7 @@ This package relies on the following peer dependencies. Make sure they are insta
 ## Usage
 
 ```js
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 import { Text } from 'react-native';
 
 const BasicUsage = () => {
@@ -99,7 +99,7 @@ Here's an example of how to apply custom styling to the `MultiStep` and `Step` c
 ```js
 import { useState } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 
 const GettingStarted = () => {
   const [formData, setFormData] = useState({
@@ -211,7 +211,7 @@ Here's an example of how to apply custom styling to the `MultiStep` and `Step` c
 ```js
 import { useState } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 
 const StyledMultiStep = () => {
   const [formData, setFormData] = useState({
@@ -395,7 +395,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { MultiStep, Step, type MultiStepRef } from 'react-native-multistep';
+import { MultiStep, Step, type MultiStepRef } from '@brijen/react-native-multistep';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 const CustomDesign = () => {
@@ -587,16 +587,16 @@ const styles = StyleSheet.create({
 
 ```
 
-## Using react-hook-form with react-native-multistep
+## Using react-hook-form with @brijen/react-native-multistep
 
-You can integrate `react-hook-form` with `react-native-multistep` to manage form state and validation across multiple steps. Below is an example demonstrating how to use `react-hook-form` with `react-native-multistep`.
+You can integrate `react-hook-form` with `@brijen/react-native-multistep` to manage form state and validation across multiple steps. Below is an example demonstrating how to use `react-hook-form` with `@brijen/react-native-multistep`.
 
 ### Example: Integrating react-hook-form
 
 ```js
 import { useForm, Controller } from 'react-hook-form';
 import { Text, TextInput, StyleSheet } from 'react-native';
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 
 const ReactHookForm = () => {
   const { control, handleSubmit } = useForm({
@@ -726,7 +726,7 @@ The `MultiStepProps` interface defines the properties for the `MultiStep` compon
 
 | Property                     | Type                     | Required | Default Value               | Description                                                                 |
 |------------------------------|--------------------------|----------|-----------------------------|-----------------------------------------------------------------------------|
-| `children`                   | `React.ReactNode`        | Yes      | -                           | The steps or content to be rendered inside the multi-step view. Typically an array of `Step` components. |
+| `children`                   | `React.ReactNode`        | Yes      | -                           | The steps or content to be rendered inside the multi-step view. This can be one or more `Step` components. |
 | `onFinalStepSubmit`          | `() => void`             | No      | -                           | Callback function that is called when the user presses the submit button on the last step. |
 | `prevButtonText`             | `string`                 | No       | `"Back"`                    | Text for the "Previous" button.                                             |
 | `nextButtonText`             | `string`                 | No       | `"Next"`                    | Text for the "Next" button.                                                 |
@@ -760,7 +760,7 @@ The `StepProps` interface defines the properties for a single step in a multi-st
 | Property             | Type                     | Required | Default Value | Description                                                                 |
 |----------------------|--------------------------|----------|---------------|-----------------------------------------------------------------------------|
 | `title`              | `string`                 | Yes      | -             | The title of the step. This is displayed as the step's label.               |
-| `children`           | `React.ReactNode`        | Yes      | -             | The content of the step. This can be any React component or elements.       |
+| `children`           | `React.ReactNode`        | Yes      | -             | The content of the step. This can be any React component.       |
 | `stepTitleStyle`     | `TextStyle`              | No       | -             | Style for the step title text. Accepts a React Native `TextStyle` object.   |
 | `nextStepTitleStyle` | `TextStyle`              | No       | -             | Style for the next step title text. Accepts a React Native `TextStyle` object. |
 | `titleComponent`     | `() => JSX.Element`      | No       | -             | Custom component for the title. Overrides `title` if provided.              |
@@ -776,7 +776,7 @@ Here's an example demonstrating how to pass a ref to `MultiStep` and use its met
 ```js
 import { useRef } from 'react';
 import { Text, View, Button } from 'react-native';
-import { MultiStep, Step, type MultiStepRef } from 'react-native-multistep';
+import { MultiStep, Step, type MultiStepRef } from '@brijen/react-native-multistep';
 
 const App = () => {
   const multiStepRef = useRef<MultiStepRef>(null);

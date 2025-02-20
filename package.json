@@ -1,5 +1,5 @@
 {
-  "name": "react-native-multistep",
+  "name": "@brijen/react-native-multistep",
   "version": "0.1.0",
   "description": "A lightweight multi-step view component for React Native with smooth transitions using Reanimated.",
   "source": "./src/index.tsx",
@@ -98,9 +98,9 @@
     "@types/react": "^18.2.44"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
-    "react-native-reanimated": "*",
+    "react": "^18.0.0",
+    "react-native": ">=0.64.0",
+    "react-native-reanimated": ">=3.0.0",
     "react-native-svg": ">=15.0.0"
   },
   "workspaces": [

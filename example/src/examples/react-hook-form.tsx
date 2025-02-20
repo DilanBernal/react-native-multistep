@@ -1,6 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import { Text, TextInput, StyleSheet } from 'react-native';
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 
 const ReactHookForm = () => {
   const { control, handleSubmit } = useForm({

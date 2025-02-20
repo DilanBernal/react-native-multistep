@@ -1,4 +1,4 @@
-import { MultiStep, Step } from 'react-native-multistep';
+import { MultiStep, Step } from '@brijen/react-native-multistep';
 import { Text } from 'react-native';
 
 const BasicUsage = () => {
