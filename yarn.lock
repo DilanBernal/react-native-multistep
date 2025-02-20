@@ -1619,6 +1619,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@brijen/react-native-multistep@*, @brijen/react-native-multistep@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@brijen/react-native-multistep@workspace:."
+  dependencies:
+    "@commitlint/config-conventional": ^17.0.2
+    "@evilmartians/lefthook": ^1.5.0
+    "@react-native/eslint-config": ^0.73.1
+    "@release-it/conventional-changelog": ^9.0.2
+    "@testing-library/react-native": ^13.0.1
+    "@types/jest": ^29.5.5
+    "@types/react": ^18.2.44
+    commitlint: ^17.0.2
+    del-cli: ^5.1.0
+    eslint: ^8.51.0
+    eslint-config-prettier: ^9.0.0
+    eslint-plugin-prettier: ^5.0.1
+    jest: ^29.7.0
+    prettier: ^3.0.3
+    react: 18.3.1
+    react-native: 0.76.6
+    react-native-builder-bob: ^0.36.0
+    react-native-reanimated: ^3.16.7
+    react-native-svg: ^15.11.1
+    react-test-renderer: 18.3.1
+    release-it: ^17.10.0
+    typescript: ^5.2.2
+  peerDependencies:
+    react: ^18.0.0
+    react-native: ">=0.64.0"
+    react-native-reanimated: ">=3.0.0"
+    react-native-svg: ">=15.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@commitlint/cli@npm:^17.8.1":
   version: 17.8.1
   resolution: "@commitlint/cli@npm:17.8.1"
@@ -12031,6 +12065,7 @@ __metadata:
   resolution: "react-native-multistep-example@workspace:example"
   dependencies:
     "@babel/core": ^7.20.0
+    "@brijen/react-native-multistep": "*"
     "@expo/metro-runtime": ~4.0.1
     expo: ~52.0.28
     expo-status-bar: ~2.0.1
@@ -12042,40 +12077,6 @@ __metadata:
     react-native-reanimated: ^3.16.7
     react-native-svg: ^15.11.1
     react-native-web: ~0.19.13
-  languageName: unknown
-  linkType: soft
-
-"react-native-multistep@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "react-native-multistep@workspace:."
-  dependencies:
-    "@commitlint/config-conventional": ^17.0.2
-    "@evilmartians/lefthook": ^1.5.0
-    "@react-native/eslint-config": ^0.73.1
-    "@release-it/conventional-changelog": ^9.0.2
-    "@testing-library/react-native": ^13.0.1
-    "@types/jest": ^29.5.5
-    "@types/react": ^18.2.44
-    commitlint: ^17.0.2
-    del-cli: ^5.1.0
-    eslint: ^8.51.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.1
-    jest: ^29.7.0
-    prettier: ^3.0.3
-    react: 18.3.1
-    react-native: 0.76.6
-    react-native-builder-bob: ^0.36.0
-    react-native-reanimated: ^3.16.7
-    react-native-svg: ^15.11.1
-    react-test-renderer: 18.3.1
-    release-it: ^17.10.0
-    typescript: ^5.2.2
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-reanimated: "*"
-    react-native-svg: ">=15.0.0"
   languageName: unknown
   linkType: soft
 

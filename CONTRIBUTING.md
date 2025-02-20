@@ -6,7 +6,7 @@ We want this community to be friendly and respectful to each other. Please follo
 
 ## Component Structure
 
-The `react-native-multistep` library is organized as follows:
+The `@brijen/react-native-multistep` library is organized as follows:
 
 ```
 src/
