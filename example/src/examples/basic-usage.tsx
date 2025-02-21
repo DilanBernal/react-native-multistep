@@ -3,7 +3,10 @@ import { Text } from 'react-native';
 
 const BasicUsage = () => {
   return (
-    <MultiStep fullScreenHeight>
+    <MultiStep
+      fullScreenHeight
+      onFinalStepSubmit={() => console.log('Submitted')}
+    >
       <Step title="Step 1">
         <Text>Content for Step 1</Text>
       </Step>

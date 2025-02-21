@@ -1,4 +1,8 @@
-import { type ViewProps, type ViewStyle, type TextStyle } from 'react-native';
+import {
+  type ViewStyle,
+  type TextStyle,
+  type TouchableOpacityProps,
+} from 'react-native';
 
 export interface StepProps {
   /**
@@ -241,7 +245,7 @@ export interface MultiStepProps {
  * Props for the internal Button component used within the library.
  * Not exposed to end users.
  */
-export interface ButtonProps extends ViewProps {
+export interface ButtonProps extends TouchableOpacityProps {
   /**
    * The text displayed inside the button.
    */

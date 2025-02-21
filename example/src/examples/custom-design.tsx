@@ -33,7 +33,6 @@ const CustomDesign = () => {
 
   return (
     <MultiStep
-      onFinalStepSubmit={handleSubmit}
       tintColor="#AD49E1"
       progressCircleColor="#FFAF00"
       nextButtonComponent={
