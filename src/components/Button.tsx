@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import type { ButtonProps } from '../types';
 
 /**
@@ -17,10 +17,10 @@ import type { ButtonProps } from '../types';
  */
 
 const Button = (props: ButtonProps) => {
-  const { title, variant, tintColor, style, textStyle } = props;
+  const { title, variant, tintColor, style, textStyle, ...rest } = props;
 
   return (
-    <View
+    <TouchableOpacity
       testID="button-container"
       style={[
         styles.container,
@@ -31,6 +31,7 @@ const Button = (props: ButtonProps) => {
         },
         style,
       ]}
+      {...rest}
     >
       <Text
         style={[
@@ -43,7 +44,7 @@ const Button = (props: ButtonProps) => {
       >
         {title}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

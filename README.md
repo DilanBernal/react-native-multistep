@@ -69,9 +69,12 @@ This package relies on the following peer dependencies. Make sure they are insta
 import { MultiStep, Step } from '@brijen/react-native-multistep';
 import { Text } from 'react-native';
 
-const BasicUsage = () => {
+const App = () => {
   return (
-    <MultiStep fullScreenHeight>
+    <MultiStep
+      fullScreenHeight
+      onFinalStepSubmit={() => console.log('Submitted')}
+    >
       <Step title="Step 1">
         <Text>Content for Step 1</Text>
       </Step>
@@ -82,7 +85,7 @@ const BasicUsage = () => {
   );
 };
 
-export default BasicUsage;
+export default App;
 ````
 
 ## Example: Using Input Fields with MultiStep
@@ -101,7 +104,7 @@ import { useState } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 import { MultiStep, Step } from '@brijen/react-native-multistep';
 
-const GettingStarted = () => {
+const App = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -173,7 +176,7 @@ const GettingStarted = () => {
   );
 };
 
-export default GettingStarted;
+export default App;
 
 const styles = StyleSheet.create({
   stepContent: {
@@ -213,7 +216,7 @@ import { useState } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 import { MultiStep, Step } from '@brijen/react-native-multistep';
 
-const StyledMultiStep = () => {
+const App = () => {
   const [formData, setFormData] = useState({
     username: '',
     phone: '',
@@ -309,7 +312,7 @@ const StyledMultiStep = () => {
   );
 };
 
-export default StyledMultiStep;
+export default App;
 
 const styles = StyleSheet.create({
   stepContent: {
@@ -398,7 +401,7 @@ import {
 import { MultiStep, Step, type MultiStepRef } from '@brijen/react-native-multistep';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
-const CustomDesign = () => {
+const App = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -485,7 +488,7 @@ const CustomDesign = () => {
   );
 };
 
-export default CustomDesign;
+export default App;
 
 const StepTitle = ({
   title,
@@ -598,7 +601,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Text, TextInput, StyleSheet } from 'react-native';
 import { MultiStep, Step } from '@brijen/react-native-multistep';
 
-const ReactHookForm = () => {
+const App = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       name: '',
@@ -698,7 +701,7 @@ const ReactHookForm = () => {
   );
 };
 
-export default ReactHookForm;
+export default App;
 
 const styles = StyleSheet.create({
   stepContent: {
@@ -763,7 +766,7 @@ The `StepProps` interface defines the properties for a single step in a multi-st
 | `children`           | `React.ReactNode`        | Yes      | -             | The content of the step. This can be any React component.       |
 | `stepTitleStyle`     | `TextStyle`              | No       | -             | Style for the step title text. Accepts a React Native `TextStyle` object.   |
 | `nextStepTitleStyle` | `TextStyle`              | No       | -             | Style for the next step title text. Accepts a React Native `TextStyle` object. |
-| `titleComponent`     | `() => JSX.Element`      | No       | -             | Custom component for the title. Overrides `title` if provided.              |
+| `titleComponent`     | `JSX.Element`            | No       | -             | Custom component for the title. Overrides `title` if provided.              |
 | `stepContainerStyle` | `ViewStyle`              | No       | -             | Style for the step container. Accepts a React Native `ViewStyle` object.    |
 
 ## MultiStepRef

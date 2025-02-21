@@ -2,7 +2,6 @@ import {
   View,
   StyleSheet,
   FlatList,
-  TouchableOpacity,
   Text,
   useWindowDimensions,
 } from 'react-native';
@@ -238,51 +237,41 @@ const MultiStep = forwardRef<MultiStepRef, MultiStepProps>((props, ref) => {
       />
 
       <View style={[styles.buttonGroup, buttonContainerStyle]}>
-        <TouchableOpacity onPress={prevStep} disabled={currentStep === 0}>
-          {prevButtonComponent ? (
-            prevButtonComponent
-          ) : (
+        {prevButtonComponent ?? (
+          <Button
+            title={prevButtonText || 'Back'}
+            variant="secondary"
+            tintColor={COLOR}
+            style={prevButtonStyle}
+            textStyle={prevButtonTextStyle}
+            onPress={prevStep}
+            disabled={currentStep === 0}
+          />
+        )}
+
+        {!isFinalStep &&
+          (nextButtonComponent ?? (
             <Button
-              title={prevButtonText || 'Back'}
-              variant="secondary"
+              title={nextButtonText || 'Next'}
+              variant="primary"
               tintColor={COLOR}
-              style={prevButtonStyle}
-              textStyle={prevButtonTextStyle}
+              style={nextButtonStyle}
+              textStyle={nextButtonTextStyle}
+              onPress={nextStep}
             />
-          )}
-        </TouchableOpacity>
+          ))}
 
-        {!isFinalStep && (
-          <TouchableOpacity onPress={nextStep}>
-            {nextButtonComponent ? (
-              nextButtonComponent
-            ) : (
-              <Button
-                title={nextButtonText || 'Next'}
-                variant="primary"
-                tintColor={COLOR}
-                style={nextButtonStyle}
-                textStyle={nextButtonTextStyle}
-              />
-            )}
-          </TouchableOpacity>
-        )}
-
-        {isFinalStep && (
-          <TouchableOpacity onPress={onFinalStepSubmit}>
-            {submitButtonComponent ? (
-              submitButtonComponent
-            ) : (
-              <Button
-                title={submitButtonText || 'Submit'}
-                variant="primary"
-                tintColor={COLOR}
-                style={submitButtonStyle}
-                textStyle={submitButtonTextStyle}
-              />
-            )}
-          </TouchableOpacity>
-        )}
+        {isFinalStep &&
+          (submitButtonComponent ?? (
+            <Button
+              title={submitButtonText || 'Submit'}
+              variant="primary"
+              tintColor={COLOR}
+              style={submitButtonStyle}
+              textStyle={submitButtonTextStyle}
+              onPress={onFinalStepSubmit}
+            />
+          ))}
       </View>
     </View>
   );
